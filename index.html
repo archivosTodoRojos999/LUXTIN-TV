@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +18,7 @@ body {
 }
 h1 { color: #ff4d4d; font-size: 36px; margin-bottom:5px; }
 h2 { color: #ff9999; margin-bottom: 25px; }
-input, button, select { padding: 10px; margin: 5px; border-radius: 8px; border: none; font-size:16px; }
+input, button, select { padding: 10px; margin: 5px; border-radius: 8px; border: none; font-size:16px; width: 100%; max-width: 300px; }
 button { background-color:#ff4d4d; color:white; cursor:pointer; transition:0.3s; }
 button:hover { background-color:#ff1a1a; }
 #authArea { margin-top:50px; text-align:center; }
@@ -29,6 +30,7 @@ span.sensi-value { font-weight:bold; color:#ffcc00; }
 </head>
 <body>
 
+<!-- Login -->
 <div id="authArea">
     <h1>Acceso SENCIFLIXER</h1>
     <input type="text" id="username" placeholder="Usuario"><br>
@@ -37,6 +39,7 @@ span.sensi-value { font-weight:bold; color:#ffcc00; }
     <p id="errorMsg" style="color:red; display:none;">Usuario o clave incorrecta</p>
 </div>
 
+<!-- Contenido principal -->
 <div id="mainContent">
     <h1>SENCIFLIXER</h1>
     <h2>Generador de sensibilidades profesional</h2>
@@ -44,22 +47,24 @@ span.sensi-value { font-weight:bold; color:#ffcc00; }
     <div id="instructions">
         <strong>Instrucciones:</strong>
         <ul>
-            <li>Selecciona tu dispositivo y escribe el modelo.</li>
+            <li>Selecciona la marca de tu celular.</li>
+            <li>Selecciona tu modelo (aparecerá según la marca).</li>
             <li>Elige tu estilo de juego: Sniper, Support o Competitive.</li>
-            <li>Ajusta el valor si quieres modificar la sensibilidad base.</li>
+            <li>Ajusta la sensibilidad si quieres cambiar el valor base.</li>
             <li>Presiona "Calcular Sensibilidades" para ver los resultados.</li>
-            <li>Presiona "Exportar Configuración" para guardar tu archivo JSON.</li>
+            <li>Presiona "Exportar Configuración" para descargar el archivo JSON.</li>
         </ul>
     </div>
 
-    <label>Dispositivo:</label>
-    <select id="deviceType">
-        <option value="Android">Android</option>
-        <option value="iOS">iOS</option>
+    <label>Marca del celular:</label>
+    <select id="deviceType" onchange="updateModels()">
+        <option value="">Selecciona una marca</option>
     </select>
 
     <label>Modelo:</label>
-    <input type="text" id="deviceModel" placeholder="Ej: Samsung S21">
+    <select id="deviceModel">
+        <option value="">Selecciona un modelo</option>
+    </select>
 
     <label>Estilo de juego:</label>
     <select id="playStyle">
@@ -89,7 +94,7 @@ span.sensi-value { font-weight:bold; color:#ffcc00; }
 </div>
 
 <script>
-// Login con usuario y clave 22
+// Login usuario y clave 22
 function checkLogin() {
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
@@ -98,6 +103,52 @@ function checkLogin() {
         document.getElementById('mainContent').style.display = 'block';
     } else {
         document.getElementById('errorMsg').style.display = 'block';
+    }
+}
+
+// Lista de marcas y modelos
+const phoneData = {
+    "Apple": ["iPhone 14", "iPhone 14 Pro", "iPhone 13", "iPhone 13 Pro"],
+    "Samsung": ["S23", "S23+", "S23 Ultra", "A53", "A73"],
+    "Huawei": ["P50", "P50 Pro", "Mate 40", "Mate 50"],
+    "Xiaomi": ["Mi 12", "Redmi Note 11", "Redmi Note 10", "Poco X4"],
+    "Oppo": ["Reno 8", "Reno 7", "Find X5"],
+    "Vivo": ["V23", "V21", "X80 Pro"],
+    "OnePlus": ["10 Pro", "9 Pro", "Nord 2"],
+    "Realme": ["GT 2", "9 Pro", "Narzo 50"],
+    "Motorola": ["Edge 30", "G82", "G72"],
+    "Google Pixel": ["Pixel 7", "Pixel 6a", "Pixel 6"],
+    "Sony": ["Xperia 1 IV", "Xperia 5 IV", "Xperia 10 IV"],
+    "LG": ["Wing", "Velvet", "V60"],
+    "Nokia": ["X20", "G50", "C30"],
+    "Asus": ["Zenfone 9", "ROG Phone 6"],
+    "Lenovo": ["Legion 3", "K14 Note"],
+    "ZTE": ["Axon 30", "Blade V30"],
+    "TCL": ["20 Pro", "30 SE"],
+    "Honor": ["Magic 5", "X8"]
+};
+
+// Llenar selector de marcas
+const deviceSelect = document.getElementById('deviceType');
+for (let brand in phoneData) {
+    let option = document.createElement('option');
+    option.value = brand;
+    option.textContent = brand;
+    deviceSelect.appendChild(option);
+}
+
+// Actualizar modelos según marca
+function updateModels() {
+    const modelSelect = document.getElementById('deviceModel');
+    const brand = deviceSelect.value;
+    modelSelect.innerHTML = '<option value="">Selecciona un modelo</option>';
+    if(brand && phoneData[brand]) {
+        phoneData[brand].forEach(model => {
+            const option = document.createElement('option');
+            option.value = model;
+            option.textContent = model;
+            modelSelect.appendChild(option);
+        });
     }
 }
 
@@ -154,10 +205,11 @@ function calculateSens() {
     document.getElementById('resultArea').style.display = 'block';
 }
 
-// Exportar configuración a JSON
+// Exportar configuración
 function exportConfig() {
     const config = {
-        dispositivo: document.getElementById('deviceType').value + ' - ' + document.getElementById('deviceModel').value,
+        marca: deviceSelect.value,
+        modelo: document.getElementById('deviceModel').value,
         estilo: document.getElementById('playStyle').value,
         sensibilidades: {
             general: document.getElementById('sensiGeneral').textContent,
