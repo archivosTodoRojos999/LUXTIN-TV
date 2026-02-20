@@ -89,10 +89,11 @@ span.sensi-value { font-weight:bold; color:#ffcc00; }
 </div>
 
 <script>
+// Login con usuario y clave 22
 function checkLogin() {
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
-    if(user === 'SENCIFLIXER' && pass === '12') {
+    if(user === '22' && pass === '22') {
         document.getElementById('authArea').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
     } else {
@@ -100,6 +101,7 @@ function checkLogin() {
     }
 }
 
+// Generador de sensibilidades
 function calculateSens() {
     const baseGen = 50;
     const baseAim = 30;
@@ -152,6 +154,7 @@ function calculateSens() {
     document.getElementById('resultArea').style.display = 'block';
 }
 
+// Exportar configuración a JSON
 function exportConfig() {
     const config = {
         dispositivo: document.getElementById('deviceType').value + ' - ' + document.getElementById('deviceModel').value,
@@ -177,4 +180,4 @@ function exportConfig() {
 </script>
 
 </body>
-                                                                      </html>
+</html>
