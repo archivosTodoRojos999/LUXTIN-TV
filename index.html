@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+    "<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -32,48 +33,56 @@ footer { font-size:11px; color:#b0b0b0; text-align:center; margin-top:30px; }
 <!-- Contenido Sensi -->
 <div id="conteudoSensi">
     <select id="marca">
-        <option value="">Selecione</option>
+        <option value="">Seleccione marca</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">iPhone</option>
+        <option value="Xiaomi">Xiaomi</option>
+        <option value="Motorola">Motorola</option>
+        <option value="Honor">Honor</option>
+        <option value="Poco">Poco</option>
     </select>
 
     <select id="modelo">
-        <option value="">Selecione</option>
+        <option value="">Seleccione modelo</option>
     </select>
 
     <button id="gerarBtn">Generar Sensi</button>
 
     <div id="resultado">
-        <p>Modelo: <span id="resModelo">-</span></p>
-        <p>Geral: <span id="resGeral">-</span></p>
-        <p>Ponto Vermelho: <span id="resPonto">-</span></p>
-        <p>Mira 2x: <span id="res2x">-</span></p>
-        <p>Mira 4x: <span id="res4x">-</span></p>
-        <p>Tamaño del Botón: <span id="resBotao">-</span></p>
+        <p>GENERAL: <span id="resGeral">-</span></p>
+        <p>MIRA PUNTO ROJO: <span id="resPonto">-</span></p>
+        <p>MIRA X2: <span id="res2x">-</span></p>
+        <p>MIRA X4: <span id="res4x">-</span></p>
+        <p>MIRA FRANCOTIRADOR: <span id="resFrancotirador">-</span></p>
+        <p>CAMARA 360: <span id="resCam360">-</span></p>
     </div>
 </div>
 
 <!-- Contenido Auxílio -->
 <div id="conteudoAux" style="display:none;">
     <select id="marcaAux">
-        <option value="">Selecione</option>
+        <option value="">Seleccione marca</option>
         <option value="Samsung">Samsung</option>
         <option value="Apple">iPhone</option>
+        <option value="Xiaomi">Xiaomi</option>
+        <option value="Motorola">Motorola</option>
+        <option value="Honor">Honor</option>
+        <option value="Poco">Poco</option>
     </select>
 
     <select id="modeloAux">
-        <option value="">Selecione</option>
+        <option value="">Seleccione modelo</option>
     </select>
 
     <button id="gerarBtnAux">Generar Auxílio</button>
 
     <div id="resultadoAux">
-        <p>Modelo: <span id="resModeloAux">-</span></p>
-        <p>Geral: <span id="resGeralAux">-</span></p>
-        <p>Ponto Vermelho: <span id="resPontoAux">-</span></p>
-        <p>Mira 2x: <span id="res2xAux">-</span></p>
-        <p>Mira 4x: <span id="res4xAux">-</span></p>
-        <p>Tamaño del Botón: <span id="resBotaoAux">-</span></p>
+        <p>GENERAL: <span id="resGeralAux">-</span></p>
+        <p>MIRA PUNTO ROJO: <span id="resPontoAux">-</span></p>
+        <p>MIRA X2: <span id="res2xAux">-</span></p>
+        <p>MIRA X4: <span id="res4xAux">-</span></p>
+        <p>MIRA FRANCOTIRADOR: <span id="resFrancotiradorAux">-</span></p>
+        <p>CAMARA 360: <span id="resCam360Aux">-</span></p>
     </div>
 </div>
 
@@ -84,80 +93,95 @@ footer { font-size:11px; color:#b0b0b0; text-align:center; margin-top:30px; }
 <script>
 // Base Sensi
 const todosCelulares = {
-    "Samsung": [
-        {nome:"Samsung - Galaxy A03", geral:95, ponto:100, mira2x:155, mira4x:125, botao:43},
-        {nome:"Samsung - Galaxy S23", geral:98, ponto:105, mira2x:160, mira4x:130, botao:45},
-        {nome:"Samsung - Galaxy Z Fold 5", geral:102, ponto:108, mira2x:164, mira4x:134, botao:48}
-    ],
-    "Apple": [
-        {nome:"iPhone - iPhone SE (2ª gen)", geral:92, ponto:98, mira2x:152, mira4x:124, botao:42},
-        {nome:"iPhone - iPhone 11", geral:94, ponto:100, mira2x:154, mira4x:126, botao:43},
-        {nome:"iPhone - iPhone 12", geral:95, ponto:101, mira2x:155, mira4x:127, botao:44}
-    ]
+  "Samsung":[
+    {nome:"Galaxy S23", geral:98, ponto:105, mira2x:160, mira4x:130, francotirador:120, cam360:100},
+    {nome:"Galaxy S22", geral:97, ponto:104, mira2x:159, mira4x:129, francotirador:118, cam360:98},
+    {nome:"Galaxy A54", geral:102, ponto:108, mira2x:164, mira4x:133, francotirador:122, cam360:102}
+  ],
+  "Apple":[
+    {nome:"iPhone 15", geral:97, ponto:102, mira2x:158, mira4x:128, francotirador:118, cam360:98},
+    {nome:"iPhone 14", geral:95, ponto:100, mira2x:156, mira4x:126, francotirador:116, cam360:96}
+  ],
+  "Xiaomi":[
+    {nome:"Redmi Note 12", geral:96, ponto:103, mira2x:158, mira4x:130, francotirador:116, cam360:96},
+    {nome:"Mi 13", geral:98, ponto:105, mira2x:160, mira4x:132, francotirador:120, cam360:100}
+  ],
+  "Motorola":[
+    {nome:"Edge 40", geral:97, ponto:104, mira2x:159, mira4x:130, francotirador:118, cam360:98},
+    {nome:"Moto G Power 2023", geral:95, ponto:101, mira2x:156, mira4x:127, francotirador:115, cam360:95}
+  ],
+  "Honor":[
+    {nome:"Magic 5 Lite", geral:96, ponto:103, mira2x:158, mira4x:130, francotirador:116, cam360:96},
+    {nome:"X8a", geral:95, ponto:102, mira2x:157, mira4x:129, francotirador:115, cam360:95}
+  ],
+  "Poco":[
+    {nome:"X5 Pro", geral:97, ponto:104, mira2x:159, mira4x:131, francotirador:118, cam360:98},
+    {nome:"F4", geral:98, ponto:105, mira2x:160, mira4x:132, francotirador:120, cam360:100}
+  ]
 };
 
 // Base Auxílio (valores más altos)
-const todosCelularesAux = {
-    "Samsung": [
-        {nome:"Samsung - Galaxy A03", geral:115, ponto:120, mira2x:175, mira4x:145, botao:53},
-        {nome:"Samsung - Galaxy S23", geral:118, ponto:125, mira2x:180, mira4x:150, botao:55},
-        {nome:"Samsung - Galaxy Z Fold 5", geral:122, ponto:130, mira2x:185, mira4x:155, botao:58}
-    ],
-    "Apple": [
-        {nome:"iPhone - iPhone SE (2ª gen)", geral:112, ponto:118, mira2x:172, mira4x:144, botao:52},
-        {nome:"iPhone - iPhone 11", geral:114, ponto:120, mira2x:174, mira4x:146, botao:53},
-        {nome:"iPhone - iPhone 12", geral:115, ponto:121, mira2x:175, mira4x:147, botao:54}
-    ]
-};
+const todosCelularesAux = {};
+for (let marca in todosCelulares){
+  todosCelularesAux[marca] = todosCelulares[marca].map(c=>({
+    nome:c.nome,
+    geral:c.geral+20,
+    ponto:c.ponto+20,
+    mira2x:c.mira2x+20,
+    mira4x:c.mira4x+20,
+    francotirador:c.francotirador+20,
+    cam360:c.cam360+20
+  }));
+}
 
 // Funciones Sensi
-const marcaSelect = document.getElementById("marca");
-const modeloSelect = document.getElementById("modelo");
+const marcaSelect=document.getElementById("marca");
+const modeloSelect=document.getElementById("modelo");
 marcaSelect.addEventListener("change",()=>{
-    const marca=marcaSelect.value;
-    modeloSelect.innerHTML='<option value="">Selecione</option>';
-    if(todosCelulares[marca]) todosCelulares[marca].forEach(c=>{
-        const option=document.createElement("option"); option.value=c.nome; option.textContent=c.nome; modeloSelect.appendChild(option);
-    });
+  const marca=marcaSelect.value;
+  modeloSelect.innerHTML='<option value="">Seleccione modelo</option>';
+  if(todosCelulares[marca]) todosCelulares[marca].forEach(c=>{
+    const option=document.createElement("option"); option.value=c.nome; option.textContent=c.nome; modeloSelect.appendChild(option);
+  });
 });
 document.getElementById("gerarBtn").addEventListener("click",()=>{
-    const marca=marcaSelect.value; const modelo=modeloSelect.value;
-    if(!marca||!modelo)return alert("Seleccione marca y modelo!");
-    const cel=todosCelulares[marca].find(c=>c.nome===modelo);
-    if(cel){
-        document.getElementById("resModelo").textContent=cel.nome;
-        document.getElementById("resGeral").textContent=cel.geral;
-        document.getElementById("resPonto").textContent=cel.ponto;
-        document.getElementById("res2x").textContent=cel.mira2x;
-        document.getElementById("res4x").textContent=cel.mira4x;
-        document.getElementById("resBotao").textContent=cel.botao;
-        document.getElementById("resultado").style.display="block";
-    }
+  const marca=marcaSelect.value; const modelo=modeloSelect.value;
+  if(!marca||!modelo)return alert("Seleccione marca y modelo!");
+  const cel=todosCelulares[marca].find(c=>c.nome===modelo);
+  if(cel){
+    document.getElementById("resGeral").textContent=cel.geral;
+    document.getElementById("resPonto").textContent=cel.ponto;
+    document.getElementById("res2x").textContent=cel.mira2x;
+    document.getElementById("res4x").textContent=cel.mira4x;
+    document.getElementById("resFrancotirador").textContent=cel.francotirador;
+    document.getElementById("resCam360").textContent=cel.cam360;
+    document.getElementById("resultado").style.display="block";
+  }
 });
 
 // Funciones Auxílio
 const marcaAux=document.getElementById("marcaAux");
 const modeloAux=document.getElementById("modeloAux");
 marcaAux.addEventListener("change",()=>{
-    const marca=marcaAux.value;
-    modeloAux.innerHTML='<option value="">Selecione</option>';
-    if(todosCelularesAux[marca]) todosCelularesAux[marca].forEach(c=>{
-        const option=document.createElement("option"); option.value=c.nome; option.textContent=c.nome; modeloAux.appendChild(option);
-    });
+  const marca=marcaAux.value;
+  modeloAux.innerHTML='<option value="">Seleccione modelo</option>';
+  if(todosCelularesAux[marca]) todosCelularesAux[marca].forEach(c=>{
+    const option=document.createElement("option"); option.value=c.nome; option.textContent=c.nome; modeloAux.appendChild(option);
+  });
 });
 document.getElementById("gerarBtnAux").addEventListener("click",()=>{
-    const marca=marcaAux.value; const modelo=modeloAux.value;
-    if(!marca||!modelo)return alert("Seleccione marca y modelo!");
-    const cel=todosCelularesAux[marca].find(c=>c.nome===modelo);
-    if(cel){
-        document.getElementById("resModeloAux").textContent=cel.nome;
-        document.getElementById("resGeralAux").textContent=cel.geral;
-        document.getElementById("resPontoAux").textContent=cel.ponto;
-        document.getElementById("res2xAux").textContent=cel.mira2x;
-        document.getElementById("res4xAux").textContent=cel.mira4x;
-        document.getElementById("resBotaoAux").textContent=cel.botao;
-        document.getElementById("resultadoAux").style.display="block";
-    }
+  const marca=marcaAux.value; const modelo=modeloAux.value;
+  if(!marca||!modelo)return alert("Seleccione marca y modelo!");
+  const cel=todosCelularesAux[marca].find(c=>c.nome===modelo);
+  if(cel){
+    document.getElementById("resGeralAux").textContent=cel.geral;
+    document.getElementById("resPontoAux").textContent=cel.ponto;
+    document.getElementById("res2xAux").textContent=cel.mira2x;
+    document.getElementById("res4xAux").textContent=cel.mira4x;
+    document.getElementById("resFrancotiradorAux").textContent=cel.francotirador;
+    document.getElementById("resCam360Aux").textContent=cel.cam360;
+    document.getElementById("resultadoAux").style.display="block";
+  }
 });
 
 // Pestañas
@@ -166,12 +190,12 @@ const tabAux=document.getElementById("tabAux");
 const conteudoSensi=document.getElementById("conteudoSensi");
 const conteudoAux=document.getElementById("conteudoAux");
 tabSensi.addEventListener("click",()=>{
-    tabSensi.classList.add("active"); tabAux.classList.remove("active");
-    conteudoSensi.style.display="block"; conteudoAux.style.display="none";
+  tabSensi.classList.add("active"); tabAux.classList.remove("active");
+  conteudoSensi.style.display="block"; conteudoAux.style.display="none";
 });
 tabAux.addEventListener("click",()=>{
-    tabAux.classList.add("active"); tabSensi.classList.remove("active");
-    conteudoSensi.style.display="none"; conteudoAux.style.display="block";
+  tabAux.classList.add("active"); tabSensi.classList.remove("active");
+  conteudoSensi.style.display="none"; conteudoAux.style.display="block";
 });
 </script>
 
