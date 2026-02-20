@@ -28,15 +28,7 @@ select {width:100%; padding:11px 10px; background:#111; border:1px solid #fff; c
 #resultado, #resultadoAux {border:1px solid #fff; padding:12px; background:#111; display:none; border-radius:8px; box-shadow:0 0 15px rgba(0,0,0,0.5);}
 #resultado p, #resultadoAux p {font-size:15px; margin:4px 0;}
 footer {font-size:11px; color:#b0b0b0; text-align:center; margin-top:30px;}
-/* Canvas animado */
-#fondoAnimado {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
+#fondoAnimado {position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1;}
 </style>
 </head>
 <body>
@@ -63,10 +55,6 @@ footer {font-size:11px; color:#b0b0b0; text-align:center; margin-top:30px;}
         <option value="Poco">Poco</option>
     </select>
 
-    <select id="modelo">
-        <option value="">Seleccione modelo</option>
-    </select>
-
     <button id="gerarBtn">Generar Sensi</button>
 
     <div id="resultado">
@@ -89,10 +77,6 @@ footer {font-size:11px; color:#b0b0b0; text-align:center; margin-top:30px;}
         <option value="Motorola">Motorola</option>
         <option value="Honor">Honor</option>
         <option value="Poco">Poco</option>
-    </select>
-
-    <select id="modeloAux">
-        <option value="">Seleccione modelo</option>
     </select>
 
     <button id="gerarBtnAux">Generar Auxílio</button>
@@ -159,18 +143,9 @@ for (let marca in todosCelulares){
 
 // Sensi
 const marcaSelect=document.getElementById("marca");
-const modeloSelect=document.getElementById("modelo");
 marcaSelect.addEventListener("change",()=>{
   const marca=marcaSelect.value;
-  modeloSelect.innerHTML='<option value="">Seleccione modelo</option>';
-  if(todosCelulares[marca]) todosCelulares[marca].forEach(c=>{
-    const option=document.createElement("option"); option.value=c.nome; option.textContent=c.nome; modeloSelect.appendChild(option);
-  });
-});
-document.getElementById("gerarBtn").addEventListener("click",()=>{
-  const marca=marcaSelect.value; const modelo=modeloSelect.value;
-  if(!marca||!modelo)return alert("Seleccione marca y modelo!");
-  const cel=todosCelulares[marca].find(c=>c.nome===modelo);
+  const cel=todosCelulares[marca][0]; // usamos el primer modelo para calcular valores
   if(cel){
     document.getElementById("resGeral").textContent=cel.geral;
     document.getElementById("resPonto").textContent=cel.ponto;
@@ -184,18 +159,9 @@ document.getElementById("gerarBtn").addEventListener("click",()=>{
 
 // Auxílio
 const marcaAux=document.getElementById("marcaAux");
-const modeloAux=document.getElementById("modeloAux");
 marcaAux.addEventListener("change",()=>{
   const marca=marcaAux.value;
-  modeloAux.innerHTML='<option value="">Seleccione modelo</option>';
-  if(todosCelularesAux[marca]) todosCelularesAux[marca].forEach(c=>{
-    const option=document.createElement("option"); option.value=c.nome; option.textContent=c.nome; modeloAux.appendChild(option);
-  });
-});
-document.getElementById("gerarBtnAux").addEventListener("click",()=>{
-  const marca=marcaAux.value; const modelo=modeloAux.value;
-  if(!marca||!modelo)return alert("Seleccione marca y modelo!");
-  const cel=todosCelularesAux[marca].find(c=>c.nome===modelo);
+  const cel=todosCelularesAux[marca][0]; // primer modelo
   if(cel){
     document.getElementById("resGeralAux").textContent=cel.geral;
     document.getElementById("resPontoAux").textContent=cel.ponto;
@@ -221,7 +187,7 @@ tabAux.addEventListener("click",()=>{
   conteudoSensi.style.display="none"; conteudoAux.style.display="block";
 });
 
-// Animación fondo
+// Animación fondo partículas azul y rojo
 const canvas = document.getElementById('fondoAnimado');
 const ctx = canvas.getContext('2d');
 let w, h;
@@ -229,26 +195,6 @@ function resize() { w = canvas.width = window.innerWidth; h = canvas.height = wi
 window.addEventListener('resize', resize);
 resize();
 
-const particulas = [];
-for(let i=0;i<100;i++){
-    particulas.push({
-        x: Math.random()*w,
-        y: Math.random()*h,
-        vx: (Math.random()-0.5)*0.3,
-        vy: (Math.random()-0.5)*0.3,
-        size: Math.random()*2+1
-    });
-}
-
-// Animación de partículas solo azul y rojo
-const canvas = document.getElementById('fondoAnimado');
-const ctx = canvas.getContext('2d');
-let w, h;
-function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-window.addEventListener('resize', resize);
-resize();
-
-// Colores azul y rojo
 const colores = ['#3c8cff','#ff3c3c'];
 
 const particulas = [];
@@ -268,21 +214,7 @@ function animar(){
     for(let p of particulas){
         ctx.beginPath();
         ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-        ctx.fillStyle=p.color + '33'; // transparencia suave
-        ctx.fill();
-        p.x += p.vx;
-        p.y += p.vy;
-        if(p.x<0) p.x=w; if(p.x>w) p.x=0;
-        if(p.y<0) p.y=h; if(p.y>h) p.y=0;
-    }
-    requestAnimationFrame(animar);
-}
-animar();
-    ctx.clearRect(0,0,w,h);
-    for(let p of particulas){
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-        ctx.fillStyle=p.color + '33'; // transparencia suave
+        ctx.fillStyle=p.color + '33'; 
         ctx.fill();
         p.x += p.vx;
         p.y += p.vy;
@@ -295,4 +227,4 @@ animar();
 </script>
 
 </body>
-</html>    
+</html>
