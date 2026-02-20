@@ -240,7 +240,7 @@ for(let i=0;i<100;i++){
     });
 }
 
-// Animación de partículas coloridas
+// Animación de partículas solo azul y rojo
 const canvas = document.getElementById('fondoAnimado');
 const ctx = canvas.getContext('2d');
 let w, h;
@@ -248,8 +248,8 @@ function resize() { w = canvas.width = window.innerWidth; h = canvas.height = wi
 window.addEventListener('resize', resize);
 resize();
 
-// Colores variados para partículas
-const colores = ['#ff3c3c','#3cff7f','#3c8cff','#ffde3c','#ff3cff','#3cfff3'];
+// Colores azul y rojo
+const colores = ['#3c8cff','#ff3c3c'];
 
 const particulas = [];
 for(let i=0;i<100;i++){
@@ -264,6 +264,20 @@ for(let i=0;i<100;i++){
 }
 
 function animar(){
+    ctx.clearRect(0,0,w,h);
+    for(let p of particulas){
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fillStyle=p.color + '33'; // transparencia suave
+        ctx.fill();
+        p.x += p.vx;
+        p.y += p.vy;
+        if(p.x<0) p.x=w; if(p.x>w) p.x=0;
+        if(p.y<0) p.y=h; if(p.y>h) p.y=0;
+    }
+    requestAnimationFrame(animar);
+}
+animar();
     ctx.clearRect(0,0,w,h);
     for(let p of particulas){
         ctx.beginPath();
