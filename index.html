@@ -1,23 +1,22 @@
-
-    "<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SENCIFLIXER - Sensibilidade</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Arial',sans-serif; }
-body { background:#000; color:#fff; padding:15px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path fill="none" stroke="%23202020" stroke-width="0.3" d="M0,40 C120,0 120,80 240,40 M0,80 C120,40 120,120 240,80 M0,120 C120,80 120,160 240,120 M30,0 C0,30 60,30 30,60 M60,0 C30,30 90,30 60,60"/></svg>'); background-position:center; }
-h1 { font-size:22px; text-align:center; margin:20px 0 5px 0; font-weight:600; }
-.subtitle { font-size:13px; color:#d0d0d0; text-align:center; margin-bottom:25px; }
-.tabs { display:flex; gap:4px; margin-bottom:22px; }
-.tab { flex:1; padding:10px 0; border:1px solid #fff; background:transparent; color:#fff; font-size:15px; cursor:pointer; }
-.tab.active { background:#fff; color:#000; font-weight:bold; }
-select { width:100%; padding:11px 10px; background:#111; border:1px solid #fff; color:#fff; font-size:15px; margin-bottom:15px; appearance:none; background-image:url('data:image/svg+xml;utf8,<svg fill="%23ffffff" viewBox="0 0 24 24" width="14" height="14"><path d="M7 10l5 5 5-5z"/></svg>'); background-repeat:no-repeat; background-position:right 10px center; }
-#gerarBtn, #gerarBtnAux { width:100%; padding:10px 0; background:transparent; border:1px solid #fff; color:#fff; font-size:15px; margin-bottom:22px; cursor:pointer; }
-#resultado, #resultadoAux { border:1px solid #fff; padding:12px; background:#111; display:none; }
-#resultado p, #resultadoAux p { font-size:15px; margin:4px 0; }
-footer { font-size:11px; color:#b0b0b0; text-align:center; margin-top:30px; }
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Arial',sans-serif;}
+body {background:#000; color:#fff; padding:15px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path fill="none" stroke="%23202020" stroke-width="0.3" d="M0,40 C120,0 120,80 240,40 M0,80 C120,40 120,120 240,80 M0,120 C120,80 120,160 240,120 M30,0 C0,30 60,30 30,60 M60,0 C30,30 90,30 60,60"/></svg>'); background-position:center;}
+h1 {font-size:22px; text-align:center; margin:20px 0 5px; font-weight:600;}
+.subtitle {font-size:13px; color:#d0d0d0; text-align:center; margin-bottom:25px;}
+.tabs {display:flex; gap:4px; margin-bottom:22px;}
+.tab {flex:1; padding:10px 0; border:1px solid #fff; background:transparent; color:#fff; font-size:15px; cursor:pointer;}
+.tab.active {background:#fff; color:#000; font-weight:bold;}
+select {width:100%; padding:11px 10px; background:#111; border:1px solid #fff; color:#fff; font-size:15px; margin-bottom:15px; appearance:none; background-image:url('data:image/svg+xml;utf8,<svg fill="%23ffffff" viewBox="0 0 24 24" width="14" height="14"><path d="M7 10l5 5 5-5z"/></svg>'); background-repeat:no-repeat; background-position:right 10px center;}
+#gerarBtn, #gerarBtnAux {width:100%; padding:10px 0; background:transparent; border:1px solid #fff; color:#fff; font-size:15px; margin-bottom:22px; cursor:pointer;}
+#resultado, #resultadoAux {border:1px solid #fff; padding:12px; background:#111; display:none;}
+#resultado p, #resultadoAux p {font-size:15px; margin:4px 0;}
+footer {font-size:11px; color:#b0b0b0; text-align:center; margin-top:30px;}
 </style>
 </head>
 <body>
@@ -91,16 +90,18 @@ footer { font-size:11px; color:#b0b0b0; text-align:center; margin-top:30px; }
 </footer>
 
 <script>
-// Base Sensi
+// Base Sensi - modelos más conocidos
 const todosCelulares = {
   "Samsung":[
     {nome:"Galaxy S23", geral:98, ponto:105, mira2x:160, mira4x:130, francotirador:120, cam360:100},
     {nome:"Galaxy S22", geral:97, ponto:104, mira2x:159, mira4x:129, francotirador:118, cam360:98},
-    {nome:"Galaxy A54", geral:102, ponto:108, mira2x:164, mira4x:133, francotirador:122, cam360:102}
+    {nome:"Galaxy A54", geral:102, ponto:108, mira2x:164, mira4x:133, francotirador:122, cam360:102},
+    {nome:"Galaxy Z Fold 5", geral:102, ponto:108, mira2x:164, mira4x:134, francotirador:122, cam360:102}
   ],
   "Apple":[
     {nome:"iPhone 15", geral:97, ponto:102, mira2x:158, mira4x:128, francotirador:118, cam360:98},
-    {nome:"iPhone 14", geral:95, ponto:100, mira2x:156, mira4x:126, francotirador:116, cam360:96}
+    {nome:"iPhone 14", geral:95, ponto:100, mira2x:156, mira4x:126, francotirador:116, cam360:96},
+    {nome:"iPhone 13", geral:94, ponto:99, mira2x:155, mira4x:125, francotirador:115, cam360:95}
   ],
   "Xiaomi":[
     {nome:"Redmi Note 12", geral:96, ponto:103, mira2x:158, mira4x:130, francotirador:116, cam360:96},
@@ -200,4 +201,18 @@ tabAux.addEventListener("click",()=>{
 </script>
 
 </body>
-</html>
+    </html><style>
+/* --- Tu CSS actual --- */
+body {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+    color: #fff;
+    padding: 15px;
+    font-family: 'Arial', sans-serif;
+    background-image:
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path fill="none" stroke="%23252525" stroke-width="0.5" d="M0,40 C120,0 120,80 240,40 M0,80 C120,40 120,120 240,80 M0,120 C120,80 120,160 240,120 M30,0 C0,30 60,30 30,60 M60,0 C30,30 90,30 60,60"/></svg>'),
+      linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+}
+    </style>
