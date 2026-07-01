@@ -42,12 +42,11 @@
                 from { transform: rotate(0deg); }
                 to { transform: rotate(360deg); }
             }
-            .oculto { display: none !important; }
-            .fade-in { animation: aparecer 0.6s ease-out; }
-            @keyframes aparecer {
-                from { opacity: 0; transform: scale(0.95); }
-                to { opacity: 1; transform: scale(1); }
-            }
+           .oculto { 
+    display: none !important; 
+    opacity: 0;
+    visibility: hidden;
+}
             /* ✅ BORDE ARCOÍRIS ANIMADO */
             .borde-arcoiris {
                 position: relative;
@@ -387,22 +386,25 @@
     </div>
 
     <script>
-        // ======================================
-        // 🔒 SEGURIDAD ANTI ROBO
-        // ======================================
-        (function() {
-            const _CLAVE = "LUXTIN-SENCI-2027-SEGURIDAD";
-            document.addEventListener('contextmenu', e => e.preventDefault());
-            document.addEventListener('keydown', e => {
-                if(e.ctrlKey && ['U','I','S','J','C'].includes(e.key.toUpperCase())) e.preventDefault();
-                if(e.key === 'F12') e.preventDefault();
-            });
+       // ======================================
+// 🔒 SEGURIDAD + ANUNCIO INICIAL CORREGIDO
+// ======================================
+(function() {
+    const _CLAVE = "LUXTIN-SENCI-2027-SEGURIDAD";
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+        if(e.ctrlKey && ['U','I','S','J','C'].includes(e.key.toUpperCase())) e.preventDefault();
+        if(e.key === 'F12') e.preventDefault();
+    });
 
-            // Anuncio inicial
-            setTimeout(() => {
-                document.getElementById('pantallaAnuncio').classList.add('oculto');
-                document.getElementById('contenedorPrincipal').classList.remove('oculto');
-            }, 4000);
+    // ✅ ANUNCIO INICIAL ARREGLADO: 4 SEGUNDOS Y VISIBILIDAD CORRECTA
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('pantallaAnuncio').style.display = 'none';
+            document.getElementById('contenedorPrincipal').classList.remove('oculto');
+            document.getElementById('contenedorPrincipal').style.display = 'block';
+        }, 4000);
+    });
 
             // ======================================
             // 📱 CAMBIO MODO CELU / PC
