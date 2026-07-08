@@ -2,159 +2,149 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LUXTIN TV </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- 📌 LIBRERÍA OFICIAL DE GOOGLE PARA INICIO DE SESIÓN -->
-    <script src="https://accounts.google.com/gsi/client" async></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        negro: '#000000',
-                        rojoLux: '#D90429',
-                        azulDirectv: '#0066CC',
-                        dorado: '#F1C40F',
-                        grisOscuro: '#121212',
-                        grisMedio: '#1E1E1E',
-                        azulFondo: '#0F172A'
-                    }
-                }
-            }
+    <title>Simulación Hacker</title>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            color: #00ff00;
+            font-family: Consolas, monospace;
+            overflow: hidden;
         }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .texto-lujo { text-shadow: 0 0 10px #D90429; }
-            .borde-directv { box-shadow: 0 0 12px #0066CC; border:1px solid #0066CC; }
-            .fondo-app { background: linear-gradient(140deg, #0F172A 0%, #121212 50%, #1E1E1E 100%); }
-            .anim-entrada { animation: entrada 1.2s ease-out; }
-            .anim-carga { animation: girar 1.5s linear infinite; }
-            .tarjeta-canal { transition: all 0.3s ease; cursor:pointer; }
-            .tarjeta-canal:hover { transform: scale(1.03); box-shadow: 0 0 10px rgba(0,102,204,0.4); }
-            .scroll-oculto { -ms-overflow-style: none; scrollbar-width: none; }
-            .scroll-oculto::-webkit-scrollbar { display: none; }
-            .seccion-sesion { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 1rem; }
+        #terminal {
+            padding: 15px;
+            height: 100vh;
+            overflow: auto;
+            white-space: pre-wrap;
         }
-        @keyframes entrada { 0%{opacity:0; transform:scale(0.9)} 100%{opacity:1; transform:scale(1)} }
-        @keyframes girar { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
-        a { display:block; width:100%; height:100%; }
+        #input {
+            width: 100%;
+            padding: 10px;
+            background: #000;
+            border: none;
+            outline: none;
+            color: #00ff00;
+            font-size: 18px;
+            border-top: 1px solid #00ff00;
+        }
+        .window {
+            position: absolute;
+            width: 250px;
+            height: 150px;
+            border: 1px solid #00ff00;
+            background: #050505;
+            color: #00ff00;
+            padding: 10px;
+            box-shadow: 0 0 12px #00ff00;
+        }
+        .close {
+            position: absolute;
+            right: 8px;
+            top: 2px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .matrix {
+            font-size: 10px;
+            line-height: 10px;
+        }
     </style>
 </head>
-<body class="fondo-app min-h-screen overflow-x-hidden">
+<body>
 
-    <!-- PANTALLA DE INICIO → IGUAL QUE QUERÍAS -->
-    <div id="pantallaInicio" class="fixed inset-0 z-50 bg-negro flex flex-col items-center justify-center">
-        <h1 class="text-[clamp(2.8rem,7vw,5rem)] font-bold text-rojoLux texto-lujo tracking-widest anim-entrada">LUXT TEAM TV</h1>
-        <p class="text-dorado text-xl mb-6">DIRECTV • PELÍCULAS • PARTIDOS • INICIO SESIÓN</p>
-        <div class="w-20 h-20 border-4 border-azulDirectv/30 border-t-azulDirectv rounded-full anim-carga"></div>
-    </div>
-
-    <!-- 📌 CONFIGURACIÓN DE GOOGLE -->
-    <div id="g_id_onload" 
-       data-client_id="685219413996-6nkv3td029hqk4o31ddh204l63nelb67.apps.googleusercontent.com" <!-- ← PONÉ TU ID DE GOOGLE CUANDO LO CREES -->
-         data-callback="respuestaInicioSesion"
-         data-auto_prompt="false">
-    </div>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <div id="contenido" class="hidden min-h-screen pb-10">
-        <nav class="sticky top-0 z-40 bg-negro/90 backdrop-blur-md px-4 py-3 flex items-center justify-between">
-            <h2 class="text-xl font-bold text-azulDirectv">📺 LUXTIN TV</h2>
-            <div id="infoUsuario" class="text-white text-sm"></div>
-        </nav>
-
-        <!-- 🟢 SECCIÓN DE INICIO DE SESIÓN CON GOOGLE -->
-        <section class="px-4 py-4">
-            <div class="seccion-sesion max-w-md mx-auto text-center">
-                <h3 class="text-xl font-bold text-dorado mb-3"><i class="fa fa-user-circle-o mr-2"></i> INICIAR SESIÓN CON GOOGLE</h3>
-                <p class="text-gray-300 text-sm mb-4">Accedé de forma segura con tu cuenta de Gmail — nunca compartas tu clave aquí, todo se gestiona desde Google 🛡️</p>
-                <!-- BOTÓN OFICIAL PERSONALIZADO -->
-                <div class="g_id_signin" 
-                     data-type="standard"
-                     data-shape="rectangular"
-                     data-theme="filled_black"
-                     data-text="signin_with"
-                     data-size="large"
-                     data-logo_alignment="left">
-                </div>
-                <div id="datosUsuario" class="mt-4 text-white text-sm hidden"></div>
-            </div>
-        </section>
-
-        <!-- AVISO CANALES -->
-        <section class="px-4 py-2">
-            <div class="bg-azulDirectv/10 border border-azulDirectv/40 rounded-lg p-3 text-center">
-                <p class="text-white text-sm">✅ Al tocar cualquier canal abre plataforma oficial DGO 📡</p>
-            </div>
-        </section>
-
-        <!-- 🟢 DEPORTES -->
-        <section class="px-4 py-3">
-            <h3 class="text-xl font-bold text-dorado mb-3 flex items-center gap-2"><i class="fa fa-futbol-o"></i> DEPORTES • DSPORTS</h3>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <div class="bg-grisMedio rounded-lg p-3 borde-directv tarjeta-canal text-center">
-                    <a href="https://www.dgo.com.ar/canal/dsports" target="_blank" rel="noopener noreferrer">
-                        <p class="font-bold text-white">DSports</p><p class="text-gray-400 text-xs">610 / 1610 HD</p>
-                    </a>
-                </div>
-                <div class="bg-grisMedio rounded-lg p-3 borde-directv tarjeta-canal text-center">
-                    <a href="https://www.dgo.com.ar/canal/dsports-2" target="_blank" rel="noopener noreferrer">
-                        <p class="font-bold text-white">DSports 2</p><p class="text-gray-400 text-xs">612 / 1612 HD</p>
-                    </a>
-                </div>
-                <div class="bg-grisMedio rounded-lg p-3 borde-directv tarjeta-canal text-center">
-                    <a href="https://www.dgo.com.ar/canal/tyc-sports" target="_blank" rel="noopener noreferrer">
-                        <p class="font-bold text-white">TyC Sports</p><p class="text-gray-400 text-xs">Fútbol Argentina</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 🟢 ENTRETENIMIENTO • GRAN HERMANO -->
-        <section class="px-4 py-3">
-            <h3 class="text-xl font-bold text-dorado mb-3 flex items-center gap-2"><i class="fa fa-home"></i> ENTRETENIMIENTO</h3>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <div class="bg-grisMedio rounded-lg p-3 borde-directv tarjeta-canal text-center">
-                    <a href="https://www.dgo.com.ar/programacion/gran-hermano" target="_blank" rel="noopener noreferrer">
-                        <p class="font-bold text-white">Gran Hermano</p><p class="text-gray-400 text-xs">En vivo 24h</p>
-                    </a>
-                </div>
-                <div class="bg-grisMedio rounded-lg p-3 borde-directv tarjeta-canal text-center">
-                    <a href="https://www.dgo.com.ar/canal/telefe" target="_blank" rel="noopener noreferrer">
-                        <p class="font-bold text-white">Telefe</p><p class="text-gray-400 text-xs">Señal General</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </div>
+    <div id="terminal"></div>
+    <input id="input" placeholder="Escribe un comando...">
 
     <script>
-        // OCULTAR INICIO
-        setTimeout(()=>{
-            document.getElementById('pantallaInicio').style.opacity = '0';
-            setTimeout(()=>{
-                document.getElementById('pantallaInicio').classList.add('hidden');
-                document.getElementById('contenido').classList.remove('hidden');
-            }, 800);
-        }, 3500);
+        const terminal = document.getElementById("terminal");
+        const input = document.getElementById("input");
 
-        // 📌 FUNCIÓN QUE RECIBE LOS DATOS CUANDO INICIAN SESIÓN
-        function respuestaInicioSesion(respuesta) {
-            // Decodificar información segura del usuario
-            const datos = JSON.parse(atob(respuesta.credential.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
-            // Mostrar en pantalla
-            document.getElementById('datosUsuario').innerHTML = `
-                <p class="text-green-400 font-semibold">✅ Sesión iniciada como: ${datos.name}</p>
-                <p class="text-gray-300">📧 Correo: ${datos.email}</p>
-                <img src="${datos.picture}" alt="Foto" class="w-10 h-10 rounded-full mx-auto mt-2 border-2 border-dorado">
-            `;
-            document.getElementById('datosUsuario').classList.remove('hidden');
-            document.getElementById('infoUsuario').innerHTML = `<span class="text-dorado">👤 ${datos.given_name}</span>`;
-            // Acá podés guardar o usar estos datos para más funciones de tu app
+        function escribir(texto, i = 0) {
+            if (i < texto.length) {
+                terminal.innerHTML += texto[i];
+                terminal.scrollTop = terminal.scrollHeight;
+                setTimeout(() => escribir(texto, i + 1), 20);
+            }
         }
+
+        function linea(t) {
+            escribir(t + "\n");
+        }
+
+        function ventana(titulo, contenido, x, y) {
+            let w = document.createElement("div");
+            w.className = "window";
+            w.style.left = x + "px";
+            w.style.top = y + "px";
+
+            w.innerHTML =
+                "<div class='close'>✖</div><b>" + titulo +
+                "</b><hr style='border-color:#00ff00'>" + contenido;
+
+            w.querySelector(".close").onclick = () => w.remove();
+
+            document.body.appendChild(w);
+        }
+
+        function efecto(nombre) {
+            terminal.innerHTML = "";
+            let texto =
+                `> Iniciando sistema internacional...\n
+> Ejecutando comando: ${nombre}\n
+> Conexión a red global...
+> Analizando objetivo...
+> Desencriptando protocolos...
+> Acceso confirmado.
+> Operación ficticia completada.\n`;
+
+            escribir(texto);
+
+            setTimeout(() => {
+                ventana(
+                    "Ubicación Internacional",
+                    "Latitud: 12.345678<br>Longitud: 98.765432<br>Estado: Conexión simulada",
+                    30, 50);
+            }, 1800);
+
+            setTimeout(() => {
+                let m = "";
+                for (let i = 0; i < 180; i++)
+                    m += Math.random() > 0.5 ? "1" : "0";
+
+                ventana(
+                    "Matrix",
+                    "<div class='matrix'>" + m.replace(/(.{30})/g, "$1<br>") + "</div>",
+                    350, 150);
+            }, 2500);
+
+            setTimeout(() => {
+                ventana(
+                    "Estado",
+                    "Proceso internacional simulado completado.",
+                    650, 80);
+            }, 3200);
+        }
+
+        input.addEventListener("keydown", e => {
+            if (e.key != "Enter") return;
+
+            let c = input.value.trim().toLowerCase();
+            input.value = "";
+
+            switch (c) {
+                case "red global":
+                    efecto("RED GLOBAL");
+                    break;
+                case "sistema":
+                    efecto("SISTEMA");
+                    break;
+                case "protocolo":
+                    efecto("PROTOCOLO");
+                    break;
+                default:
+                    linea("> Comando desconocido.");
+            }
+        });
     </script>
 </body>
 </html>
