@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>LUXTIN SENCI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -16,17 +16,62 @@
             z-index: 0;
             background: #000;
         }
-        body {margin:0; padding:0; min-height:100vh; position:relative;}
+        body {
+            margin: 0;
+            padding: 0.8rem 0;
+            min-height: 100vh;
+            position: relative;
+        }
 
-        /* PANEL PRINCIPAL CON FONDO ARCOÍRIS ANIMADO */
+        /* ANUNCIO PRINCIPAL */
+        .anuncio {
+            position: relative;
+            z-index: 10;
+            max-width: 94%;
+            margin: 0 auto 1rem auto;
+            padding: 1rem;
+            background: linear-gradient(90deg, #ff002b, #ff4d00, #ffcc00, #ff002b);
+            background-size: 300% 300%;
+            animation: brilloAnuncio 4s ease infinite;
+            border-radius: 12px;
+            border: 2px solid #fff;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 0, 43, 0.5);
+        }
+        @keyframes brilloAnuncio {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .anuncio h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(0,0,0,0.6);
+        }
+        .anuncio p {
+            margin: 0.3rem 0 0 0;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* PANEL PRINCIPAL - MÁS GRANDE, AJUSTADO A CELULAR */
         .ff-panel {
-            position:relative; z-index:10;
+            position: relative;
+            z-index: 10;
             background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #00ff00, #0099ff, #6600ff, #ff00ff);
             background-size: 400% 400%;
             animation: arcoiris 8s ease infinite;
             border: 3px solid #ff2222;
-            box-shadow:0 0 25px rgba(255,34,34,0.4), inset 0 0 20px rgba(0,0,0,0.7);
-            max-width:420px; width:92%; margin:1rem auto; padding:1.5rem; border-radius:12px; overflow:hidden;
+            box-shadow: 0 0 25px rgba(255,34,34,0.4), inset 0 0 20px rgba(0,0,0,0.7);
+            max-width: 94%;
+            width: 94%;
+            margin: 0 auto;
+            padding: 1.2rem;
+            border-radius: 12px;
+            overflow: hidden;
         }
         @keyframes arcoiris {
             0% {background-position: 0% 50%;}
@@ -34,42 +79,169 @@
             100% {background-position: 0% 50%;}
         }
         .contenido-interior {
-            background: rgba(0,0,0,0.75);
+            background: rgba(0,0,0,0.78);
             border-radius: 8px;
-            padding: 1rem;
+            padding: 1.3rem;
         }
 
         .titulo-principal {
-            text-align:center; font-size:2.2rem; font-weight:bold; margin-bottom:1.5rem;
-            color:#ff2222 !important; text-shadow:0 0 12px rgba(255,34,34,0.8);
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 0 1.5rem 0;
+            color: #ff2222 !important;
+            text-shadow: 0 0 12px rgba(255,34,34,0.8);
         }
-        .ff-label {color:#ff2222; font-weight:bold;}
-        .ff-value {color:#fff; font-size:1.1em;}
+        .ff-label {
+            color: #ff2222;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .ff-value {
+            color: #fff;
+            font-size: 1.2rem;
+        }
         .ff-button {
-            background:linear-gradient(90deg,#dd0000,#ff2222); color:#000; font-weight:bold;
-            cursor:pointer; transition:all .2s ease;
+            background: linear-gradient(90deg,#dd0000,#ff2222);
+            color: #000;
+            font-weight: bold;
+            font-size: 1.15rem;
+            padding: 0.9rem;
+            cursor: pointer;
+            transition: all .2s ease;
         }
-        .ff-button:hover {box-shadow:0 0 18px rgba(255,34,34,.7); transform:scale(1.02);}
-        .carga {display:none; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; padding:2rem; position:relative; z-index:10;}
-        .contenedor-carga {position:relative; width:110px; height:110px;}
-        .spinner-centro {width:110px; height:110px; border:6px solid rgba(255,34,34,.2); border-top:6px solid #ff2222; border-radius:50%; animation:girarCentro 1.5s linear infinite;}
-        .spinner-azul-exterior {position:absolute; top:-12px; left:-12px; width:134px; height:134px; border:5px solid transparent; border-top:5px solid #2196F3; border-right:5px solid #2196F3; border-radius:50%; animation:girarAzul 2s linear infinite;}
+        .ff-button:hover {
+            box-shadow: 0 0 18px rgba(255,34,34,.7);
+            transform: scale(1.02);
+        }
+        .carga {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 10;
+        }
+        .contenedor-carga {
+            position: relative;
+            width: 110px;
+            height: 110px;
+        }
+        .spinner-centro {
+            width: 110px;
+            height: 110px;
+            border: 6px solid rgba(255,34,34,.2);
+            border-top: 6px solid #ff2222;
+            border-radius: 50%;
+            animation: girarCentro 1.5s linear infinite;
+        }
+        .spinner-azul-exterior {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 134px;
+            height: 134px;
+            border: 5px solid transparent;
+            border-top: 5px solid #2196F3;
+            border-right: 5px solid #2196F3;
+            border-radius: 50%;
+            animation: girarAzul 2s linear infinite;
+        }
         @keyframes girarCentro {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
         @keyframes girarAzul {0%{transform:rotate(0deg);}100%{transform:rotate(-360deg);}}
-        .texto-carga {color:#ff2222; font-weight:bold; font-size:1rem; text-shadow:0 0 8px rgba(255,34,34,.5); text-align:center;}
-        .selector-tipo {display:flex; gap:1rem; justify-content:center; margin-bottom:1.5rem;}
-        .btn-tipo {padding:.5rem 1rem; border:2px solid #ff2222; border-radius:.5rem; background:rgba(255,34,34,.15); color:#ff2222; font-weight:bold; cursor:pointer; transition:all .3s ease; font-size:.95rem;}
-        .btn-tipo.activo {background:linear-gradient(90deg,#dd0000,#ff2222); color:#000; box-shadow:0 0 12px rgba(255,34,34,.5);}
-        .seccion {display:none; width:100%; box-sizing:border-box;}
-        .seccion.activa {display:block;}
-        .nivel-selector {display:flex; gap:.5rem; justify-content:center; margin:.8rem 0;}
-        .btn-nivel {padding:.4rem .8rem; border:1px solid #ff2222; border-radius:.4rem; background:rgba(0,0,0,.5); color:#fff; font-size:.9rem; cursor:pointer; transition:.2s;}
-        .btn-nivel.activo {background:#ff2222; color:#000; font-weight:bold;}
-        input,select {box-sizing:border-box; background:#1a1a1a; border:1px solid #ff222240; color:#fff; padding:.5rem; border-radius:.3rem;}
+        .texto-carga {
+            color: #ff2222;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 0 0 8px rgba(255,34,34,.5);
+            text-align: center;
+        }
+        .selector-tipo {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .btn-tipo {
+            padding: 0.7rem 1.2rem;
+            border: 2px solid #ff2222;
+            border-radius: 0.5rem;
+            background: rgba(255,34,34,.15);
+            color: #ff2222;
+            font-weight: bold;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+        .btn-tipo.activo {
+            background: linear-gradient(90deg,#dd0000,#ff2222);
+            color: #000;
+            box-shadow: 0 0 12px rgba(255,34,34,.5);
+        }
+        .seccion {
+            display: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .seccion.activa {
+            display: block;
+        }
+        .nivel-selector {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .btn-nivel {
+            padding: 0.6rem 1rem;
+            border: 1px solid #ff2222;
+            border-radius: 0.4rem;
+            background: rgba(0,0,0,.5);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .btn-nivel.activo {
+            background: #ff2222;
+            color: #000;
+            font-weight: bold;
+        }
+        input, select {
+            box-sizing: border-box;
+            background: #1a1a1a;
+            border: 1px solid #ff222240;
+            color: #fff;
+            padding: 0.8rem;
+            border-radius: 0.4rem;
+            font-size: 1.05rem;
+            width: 100%;
+        }
+        .space-y-3 > * + * {
+            margin-top: 0.9rem;
+        }
+        .mb-4 {
+            margin-bottom: 1.2rem;
+        }
+        .py-1\.5 {
+            padding-top: 0.8rem;
+            padding-bottom: 0.8rem;
+        }
     </style>
 </head>
 <body>
 <canvas id="matrix"></canvas>
+
+<!-- ANUNCIO AL PRINCIPIO -->
+<div class="anuncio">
+    <h2>🔥 TU SENSIBILIDAD TE ESPERA 🔥</h2>
+    <p>Entra ya al Live y consigue la mejor configuración para dar todo rojo</p>
+</div>
+
 <div class="ff-panel">
     <div class="contenido-interior">
         <h1 class="titulo-principal">LUXTIN SENCI</h1>
@@ -82,12 +254,28 @@
         <div id="seccion-celular" class="seccion activa">
             <div class="mb-4 space-y-3">
                 <label class="ff-label block">Marca:</label>
-                <select id="marca" class="w-full" onchange="cargarModelos()">
+                <select id="marca" onchange="cargarModelos()">
                     <option value="">Seleccionar marca</option>
-                    <option value="Samsung">Samsung</option><option value="Motorola">Motorola</option><option value="Xiaomi">Xiaomi/Redmi/Poco</option><option value="Realme">Realme</option><option value="Oppo">Oppo</option><option value="Vivo">Vivo</option><option value="Apple">Apple</option><option value="Infinix">Infinix</option><option value="Tecno">Tecno</option><option value="Huawei">Huawei</option><option value="Honor">Honor</option><option value="Asus">Asus</option><option value="OnePlus">OnePlus</option><option value="Google">Google</option><option value="Nokia">Nokia</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Motorola">Motorola</option>
+                    <option value="Xiaomi">Xiaomi/Redmi/Poco</option>
+                    <option value="Realme">Realme</option>
+                    <option value="Oppo">Oppo</option>
+                    <option value="Vivo">Vivo</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Infinix">Infinix</option>
+                    <option value="Tecno">Tecno</option>
+                    <option value="Huawei">Huawei</option>
+                    <option value="Honor">Honor</option>
+                    <option value="Asus">Asus</option>
+                    <option value="OnePlus">OnePlus</option>
+                    <option value="Google">Google</option>
+                    <option value="Nokia">Nokia</option>
                 </select>
                 <label class="ff-label block">Modelo:</label>
-                <select id="modelo" class="w-full"><option value="">Seleccionar primero marca</option></select>
+                <select id="modelo">
+                    <option value="">Seleccionar primero marca</option>
+                </select>
 
                 <label class="ff-label block text-center mt-3">Nivel de Sensibilidad:</label>
                 <div class="nivel-selector">
@@ -97,33 +285,55 @@
                 </div>
                 <input type="hidden" id="nivelSenci" value="media">
             </div>
-            <button onclick="generarSensibilidadCelular()" class="ff-button w-full py-2.5 rounded-lg text-base mb-4">Generar Sensibilidad Calibrada</button>
+            <button onclick="generarSensibilidadCelular()" class="ff-button w-full rounded-lg mb-4">Generar Sensibilidad Calibrada</button>
             <div id="carga-celular" class="carga">
-                <div class="contenedor-carga"><div class="spinner-centro"></div><div class="spinner-azul-exterior"></div></div>
+                <div class="contenedor-carga">
+                    <div class="spinner-centro"></div>
+                    <div class="spinner-azul-exterior"></div>
+                </div>
                 <div class="texto-carga">Calculando precisión por dispositivo y nivel...</div>
             </div>
             <div id="resultado-celular" class="hidden">
                 <h2 class="text-center text-lg text-yellow-300 font-semibold mb-3">SENSIBILIDAD EXACTA</h2>
                 <div class="space-y-1.5 pl-2">
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">General</span><span class="ff-value" id="valGeneralCel"></span></div>
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">Mira Punto Rojo</span><span class="ff-value" id="valPuntoRojoCel"></span></div>
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">Mira 2x</span><span class="ff-value" id="val2xCel"></span></div>
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">Mira 4x</span><span class="ff-value" id="val4xCel"></span></div>
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">Francotirador</span><span class="ff-value" id="valFrancotiradorCel"></span></div>
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">Cámara 360°</span><span class="ff-value" id="valCamara360Cel"></span></div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">General</span>
+                        <span class="ff-value" id="valGeneralCel"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">Mira Punto Rojo</span>
+                        <span class="ff-value" id="valPuntoRojoCel"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">Mira 2x</span>
+                        <span class="ff-value" id="val2xCel"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">Mira 4x</span>
+                        <span class="ff-value" id="val4xCel"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">Francotirador</span>
+                        <span class="ff-value" id="valFrancotiradorCel"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">Cámara 360°</span>
+                        <span class="ff-value" id="valCamara360Cel"></span>
+                    </div>
                 </div>
-                <div class="mt-4 p-2.5 bg-yellow-900/30 rounded border border-yellow-700">
-                    <p class="text-yellow-200 text-center">✅ Botón recomendado: <strong>41</strong> | Máximo permitido: 200</p>
+                <div class="mt-4 p-3 bg-yellow-900/30 rounded border border-yellow-700">
+                    <p class="text-yellow-200 text-center text-lg">✅ Botón recomendado: <strong>41</strong> | Máximo: 200</p>
                 </div>
             </div>
         </div>
-               <!-- SECCIÓN PC - INTACTA + AJUSTADA -->
+
+        <!-- SECCIÓN PC -->
         <div id="seccion-pc" class="seccion">
             <div class="mb-4 space-y-3">
                 <label class="ff-label block">Fabricante:</label>
-                <input type="text" id="marcaPC" class="w-full" placeholder="Lenovo, HP, Dell, Asus..." required>
+                <input type="text" id="marcaPC" placeholder="Lenovo, HP, Dell, Asus...">
                 <label class="ff-label block">Modelo/Configuración:</label>
-                <input type="text" id="modeloPC" class="w-full" placeholder="Legion, Pavilion, Emulador..." required>
+                <input type="text" id="modeloPC" placeholder="Legion, Pavilion, Emulador...">
                 <label class="ff-label block text-center mt-3">Nivel de Sensibilidad:</label>
                 <div class="nivel-selector">
                     <button class="btn-nivel" onclick="seleccionarNivelPC('baja')">🔽 Baja</button>
@@ -132,23 +342,44 @@
                 </div>
                 <input type="hidden" id="nivelSenciPC" value="media">
             </div>
-            <button onclick="generarSensibilidadPC()" class="ff-button w-full py-2.5 rounded-lg text-base mb-4">Generar Sensibilidad PC</button>
+            <button onclick="generarSensibilidadPC()" class="ff-button w-full rounded-lg mb-4">Generar Sensibilidad PC</button>
             <div id="carga-pc" class="carga">
-                <div class="contenedor-carga"><div class="spinner-centro"></div><div class="spinner-azul-exterior"></div></div>
+                <div class="contenedor-carga">
+                    <div class="spinner-centro"></div>
+                    <div class="spinner-azul-exterior"></div>
+                </div>
                 <div class="texto-carga">Ajustando para ratón/emulador...</div>
             </div>
             <div id="resultado-pc" class="hidden">
                 <h2 class="text-center text-lg text-yellow-300 font-semibold mb-3">SENSIBILIDAD PC</h2>
                 <div class="space-y-1.5 pl-2">
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">General</span><span class="ff-value" id="valGeneralPC"></span></div>
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">Mira Punto Rojo</span><span class="ff-value" id="valPuntoRojoPC"></span></div>
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">Mira 2x</span><span class="ff-value" id="val2xPC"></span></div>
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">Mira 4x</span><span class="ff-value" id="val4xPC"></span></div>
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">Francotirador</span><span class="ff-value" id="valFrancotiradorPC"></span></div>
-                    <div class="flex justify-between border-b border-gray-700 py-1.5"><span class="ff-label">Cámara 360°</span><span class="ff-value" id="valCamara360PC"></span></div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">General</span>
+                        <span class="ff-value" id="valGeneralPC"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">Mira Punto Rojo</span>
+                        <span class="ff-value" id="valPuntoRojoPC"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">Mira 2x</span>
+                        <span class="ff-value" id="val2xPC"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">Mira 4x</span>
+                        <span class="ff-value" id="val4xPC"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">Francotirador</span>
+                        <span class="ff-value" id="valFrancotiradorPC"></span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-700 py-1.5">
+                        <span class="ff-label">Cámara 360°</span>
+                        <span class="ff-value" id="valCamara360PC"></span>
+                    </div>
                 </div>
-                <div class="mt-4 p-2.5 bg-yellow-900/30 rounded border border-yellow-700">
-                    <p class="text-yellow-200 text-center">✅ Botón recomendado: <strong>41</strong></p>
+                <div class="mt-4 p-3 bg-yellow-900/30 rounded border border-yellow-700">
+                    <p class="text-yellow-200 text-center text-lg">✅ Botón recomendado: <strong>41</strong></p>
                 </div>
             </div>
         </div>
@@ -157,20 +388,42 @@
 
 <script>
 // EFECTO MATRIX - INTACTO
-const canvas=document.getElementById('matrix'), ctx=canvas.getContext('2d');
-function resizeCanvas(){canvas.width=window.innerWidth; canvas.height=window.innerHeight;}
-resizeCanvas(); window.addEventListener('resize',resizeCanvas);
-const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', fs=14, cols=Math.floor(canvas.width/fs), drops=Array(cols).fill(1);
-function drawMatrix(){ctx.fillStyle='rgba(0,0,0,.06)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.fillStyle='#00cc00'; ctx.font=fs+'px monospace'; for(let i=0;i<drops.length;i++){let c=chars[Math.floor(Math.random()*chars.length)]; ctx.fillText(c,i*fs,drops[i]*fs); if(drops[i]*fs>canvas.height&&Math.random()>.975) drops[i]=0; drops[i]++;}}
-setInterval(drawMatrix,50);
+const canvas = document.getElementById('matrix'), ctx = canvas.getContext('2d');
+function resizeCanvas(){canvas.width = window.innerWidth; canvas.height = window.innerHeight;}
+resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', fs = 14, cols = Math.floor(canvas.width / fs), drops = Array(cols).fill(1);
+function drawMatrix(){
+    ctx.fillStyle = 'rgba(0,0,0,.06)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#00cc00'; ctx.font = fs + 'px monospace';
+    for(let i = 0; i < drops.length; i++){
+        let c = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(c, i * fs, drops[i] * fs);
+        if(drops[i] * fs > canvas.height && Math.random() > .975) drops[i] = 0;
+        drops[i]++;
+    }
+}
+setInterval(drawMatrix, 50);
 
 // CAMBIOS DE SECCIÓN Y NIVELES
-function cambiarSeccion(tipo){document.querySelectorAll('.seccion').forEach(s=>s.classList.remove('activa')); document.querySelectorAll('.btn-tipo').forEach(b=>b.classList.remove('activo')); document.getElementById('seccion-'+tipo).classList.add('activa'); event.target.classList.add('activo');}
-function seleccionarNivel(n){document.querySelectorAll('#seccion-celular .btn-nivel').forEach(b=>b.classList.remove('activo')); event.target.classList.add('activo'); document.getElementById('nivelSenci').value=n;}
-function seleccionarNivelPC(n){document.querySelectorAll('#seccion-pc .btn-nivel').forEach(b=>b.classList.remove('activo')); event.target.classList.add('activo'); document.getElementById('nivelSenciPC').value=n;}
+function cambiarSeccion(tipo){
+    document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
+    document.querySelectorAll('.btn-tipo').forEach(b => b.classList.remove('activo'));
+    document.getElementById('seccion-' + tipo).classList.add('activa');
+    event.target.classList.add('activo');
+}
+function seleccionarNivel(n){
+    document.querySelectorAll('#seccion-celular .btn-nivel').forEach(b => b.classList.remove('activo'));
+    event.target.classList.add('activo');
+    document.getElementById('nivelSenci').value = n;
+}
+function seleccionarNivelPC(n){
+    document.querySelectorAll('#seccion-pc .btn-nivel').forEach(b => b.classList.remove('activo'));
+    event.target.classList.add('activo');
+    document.getElementById('nivelSenciPC').value = n;
+}
 
-// LISTADO MASIVO DE MODELOS + LÓGICA DE GAMA
-const modelosPorMarca={
+// LISTADO DE MODELOS
+const modelosPorMarca = {
     Samsung:["A03","A04","A10","A12","A13","A14","A15","A20","A22","A24","A32","A34","A52","A53","A54","S10","S20","S21","S22","S23","S24","Z Flip","Z Fold"],
     Motorola:["E6","E7","E13","G8","G9","G10","G20","G22","G30","G52","G60","Edge 20","Edge 30","Moto G Power"],
     Xiaomi:["Redmi 9","Redmi 10","Redmi 12","Note 8","Note 9","Note 10","Note 11","Note 12","Poco M3","Poco X3","Poco X5","Mi 11 Lite"],
@@ -187,68 +440,85 @@ const modelosPorMarca={
     Google:["Pixel 6","Pixel 7","Pixel 8"],
     Nokia:["G20","G42","X30"]
 };
-function cargarModelos(){const m=document.getElementById('marca').value, sel=document.getElementById('modelo'); sel.innerHTML='<option value="">Seleccionar modelo</option>'; if(!m)return; modelosPorMarca[m].forEach(mod=>{let opt=document.createElement('option');opt.value=mod;opt.textContent=mod;sel.appendChild(opt);});}
+function cargarModelos(){
+    const m = document.getElementById('marca').value, sel = document.getElementById('modelo');
+    sel.innerHTML = '<option value="">Seleccionar modelo</option>';
+    if(!m) return;
+    modelosPorMarca[m].forEach(mod => {
+        let opt = document.createElement('option');
+        opt.value = mod; opt.textContent = mod; sel.appendChild(opt);
+    });
+}
 
-// SISTEMA DE CÁLCULO PRECISO POR DISPOSITIVO + NIVEL
+// CÁLCULO PRECISO
 function calcularValores(base, nivel){
-    const ajustes={
+    const ajustes = {
         baja: {g:-12, p:-10, m2:-11, m4:-13, fr:-8, c:-9},
         media:{g:0, p:0, m2:0, m4:0, fr:0, c:0},
         alta: {g:+12, p:+10, m2:+11, m4:+13, fr:+8, c:+9}
     };
-    const a=ajustes[nivel];
+    const a = ajustes[nivel];
     return {
-        g:Math.min(200, Math.max(10, base.g+a.g)),
-        p:Math.min(200, Math.max(10, base.p+a.p)),
-        m2:Math.min(200, Math.max(10, base.m2+a.m2)),
-        m4:Math.min(200, Math.max(10, base.m4+a.m4)),
-        fr:Math.min(200, Math.max(10, base.fr+a.fr)),
-        c:Math.min(200, Math.max(10, base.c+a.c))
+        g:Math.min(200, Math.max(10, base.g + a.g)),
+        p:Math.min(200, Math.max(10, base.p + a.p)),
+        m2:Math.min(200, Math.max(10, base.m2 + a.m2)),
+        m4:Math.min(200, Math.max(10, base.m4 + a.m4)),
+        fr:Math.min(200, Math.max(10, base.fr + a.fr)),
+        c:Math.min(200, Math.max(10, base.c + a.c))
     };
 }
-function obtenerBase(marca,mod){
-    const clave=(marca+" "+mod).toLowerCase();
-    // Lógica por tipo de dispositivo
-    if(clave.includes("a0")||clave.includes("e6")||clave.includes("c11")||clave.includes("y12")) return {g:170,p:165,m2:168,m4:160,fr:80,c:140}; // Gama Baja
-    if(clave.includes("a5")||clave.includes("g20")||clave.includes("note")||clave.includes("y5")) return {g:185,p:180,m2:183,m4:177,fr:90,c:155}; // Gama Media
-    if(clave.includes("s2")||clave.includes("edge")||clave.includes("poco x")||clave.includes("pro")||clave.includes("iphone 14")||clave.includes("rog")) return {g:195,p:190,m2:193,m4:188,fr:95,c:165}; // Gama Alta
-    return {g:180,p:175,m2:178,m4:172,fr:85,c:150}; // Por defecto
+function obtenerBase(marca, mod){
+    const clave = (marca + " " + mod).toLowerCase();
+    if(clave.includes("a0")||clave.includes("e6")||clave.includes("c11")||clave.includes("y12"))
+        return {g:170,p:165,m2:168,m4:160,fr:80,c:140};
+    if(clave.includes("a5")||clave.includes("g20")||clave.includes("note")||clave.includes("y5"))
+        return {g:185,p:180,m2:183,m4:177,fr:90,c:155};
+    if(clave.includes("s2")||clave.includes("edge")||clave.includes("poco x")||clave.includes("pro")||clave.includes("iphone 14")||clave.includes("rog"))
+        return {g:195,p:190,m2:193,m4:188,fr:95,c:165};
+    return {g:180,p:175,m2:178,m4:172,fr:85,c:150};
 }
 
 function generarSensibilidadCelular(){
-    let m=document.getElementById('marca').value, mod=document.getElementById('modelo').value, n=document.getElementById('nivelSenci').value;
-    if(!m||!mod){alert('Elegí marca y modelo primero');return;}
-    document.getElementById('resultado-celular').style.display='none'; document.getElementById('carga-celular').style.display='flex';
-    setTimeout(()=>{
-        let base=obtenerBase(m,mod);
-        let final=calcularValores(base,n);
-        document.getElementById('valGeneralCel').textContent=final.g;
-        document.getElementById('valPuntoRojoCel').textContent=final.p;
-        document.getElementById('val2xCel').textContent=final.m2;
-        document.getElementById('val4xCel').textContent=final.m4;
-        document.getElementById('valFrancotiradorCel').textContent=final.fr;
-        document.getElementById('valCamara360Cel').textContent=final.c;
-        document.getElementById('carga-celular').style.display='none'; document.getElementById('resultado-celular').style.display='block';
-    },1600);
+    let m = document.getElementById('marca').value, mod = document.getElementById('modelo').value, n = document.getElementById('nivelSenci').value;
+    if(!m || !mod){alert('Elegí marca y modelo primero'); return;}
+    document.getElementById('resultado-celular').style.display = 'none';
+    document.getElementById('carga-celular').style.display = 'flex';
+    setTimeout(() => {
+        let base = obtenerBase(m, mod);
+        let final = calcularValores(base, n);
+        document.getElementById('valGeneralCel').textContent = final.g;
+        document.getElementById('valPuntoRojoCel').textContent = final.p;
+        document.getElementById('val2xCel').textContent = final.m2;
+        document.getElementById('val4xCel').textContent = final.m4;
+        document.getElementById('valFrancotiradorCel').textContent = final.fr;
+        document.getElementById('valCamara360Cel').textContent = final.c;
+        document.getElementById('carga-celular').style.display = 'none';
+        document.getElementById('resultado-celular').style.display = 'block';
+    }, 1600);
 }
 
-// SISTEMA PC IGUAL DE PRECISO
 function generarSensibilidadPC(){
-    let m=document.getElementById('marcaPC').value.trim(), mod=document.getElementById('modeloPC').value.trim(), n=document.getElementById('nivelSenciPC').value;
-    if(!m||!mod){alert('Completá los datos de PC');return;}
-    document.getElementById('resultado-pc').style.display='none'; document.getElementById('carga-pc').style.display='flex';
-    setTimeout(()=>{
-        const basePC={baja:{g:165,p:160,m2:163,m4:157,fr:78,c:138},media:{g:180,p:174,m2:178,m4:171,fr:85,c:145},alta:{g:195,p:190,m2:193,m4:187,fr:92,c:158}};
-        let f=basePC[n];
-        document.getElementById('valGeneralPC').textContent=f.g;
-        document.getElementById('valPuntoRojoPC').textContent=f.p;
-        document.getElementById('val2xPC').textContent=f.m2;
-        document.getElementById('val4xPC').textContent=f.m4;
-        document.getElementById('valFrancotiradorPC').textContent=f.fr;
-        document.getElementById('valCamara360PC').textContent=f.c;
-        document.getElementById('carga-pc').style.display='none'; document.getElementById('resultado-pc').style.display='block';
-    },1600);
+    let m = document.getElementById('marcaPC').value.trim(), mod = document.getElementById('modeloPC').value.trim(), n = document.getElementById('nivelSenciPC').value;
+    if(!m || !mod){alert('Completá los datos de PC'); return;}
+    document.getElementById('resultado-pc').style.display = 'none';
+    document.getElementById('carga-pc').style.display = 'flex';
+    setTimeout(() => {
+        const basePC = {
+            baja:{g:165,p:160,m2:163,m4:157,fr:78,c:138},
+            media:{g:180,p:174,m2:178,m4:171,fr:85,c:145},
+            alta:{g:195,p:190,m2:193,m4:187,fr:92,c:158}
+        };
+        let f = basePC[n];
+        document.getElementById('valGeneralPC').textContent = f.g;
+        document.getElementById('valPuntoRojoPC').textContent = f.p;
+        document.getElementById('val2xPC').textContent = f.m2;
+        document.getElementById('val4xPC').textContent = f.m4;
+        document.getElementById('valFrancotiradorPC').textContent = f.fr;
+        document.getElementById('valCamara360PC').textContent = f.c;
+        document.getElementById('carga-pc').style.display = 'none';
+        document.getElementById('resultado-pc').style.display = 'block';
+    }, 1600);
 }
 </script>
 </body>
-</html> 
+</html>
