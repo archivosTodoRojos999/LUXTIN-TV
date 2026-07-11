@@ -3,109 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MINI TALENTO 777 - GENERADOR</title>
-
-    <!-- 🛡️ PROTECCIÓN -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:;">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-
+    <title>MINI TALENTO 777 - ACTUALIZADO Vs,3.9</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-        body { background: #000; color: #fff; min-height: 100vh; overflow-x: hidden; }
+        html, body { min-height: 100vh; background: #000; color: #fff; overflow-x: hidden; }
         .oculto { display: none !important; }
-        .centrar { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-        input, button { padding: 12px 15px; margin: 8px 0; border: none; border-radius: 8px; font-size: 16px; width: 100%; max-width: 350px; }
-        button { background: #ff0000; color: #fff; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .centrar { 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            padding: 15px; min-height: 100vh; text-align: center; 
+        }
+        input, select, button { width: 100%; max-width: 380px; padding: 14px; margin: 8px 0; border: 2px solid #ff0000; border-radius: 10px; font-size: 17px; background: #111; color: #fff; }
+        select option { background: #000; color: #fff !important; }
+        button { background: #ff0000; font-weight: bold; cursor: pointer; border: none; }
         button:hover { background: #ff3333; }
-        h1, h2 { text-align: center; margin-bottom: 15px; }
+        h1, h2 { text-align: center; margin-bottom: 15px; color: #ff0000; }
+        .resultado { background: #111; padding: 20px; border-radius: 10px; margin-top: 15px; border: 2px solid #ff0000; width: 100%; max-width: 380px; }
         .aviso { color: #ff0000; font-weight: bold; text-align: center; margin: 10px 0; }
+        /* FONDO MATRIX */
+        #fondoMatrix { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; }
+        /* ANUNCIO DE INICIO */
+        #pantallaAnuncio { 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; 
+            z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            font-size: 2.2rem; font-weight: bold; color: #ff0000; text-align: center; padding: 20px; 
+        }
+        /* MARCA LOGO ESTILO MARCA RECONOCIDA */
+        .marca-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ff0000;
+            letter-spacing: 3px;
+            margin: 20px 0;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+        }
+        /* BOTÓN PREMIUM ARRIBA IZQUIERDA */
+        #btnPremium {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: auto;
+            padding: 6px 12px;
+            font-size: 14px;
+            background: #220000;
+            border: 1px solid #ff0000;
+            z-index: 100;
+        }
+        /* ANIMACIÓN DE CARGA */
+        .carga { width: 60px; height: 60px; border: 5px solid #0066ff; border-top: 5px solid transparent; border-radius: 50%; animation: girar 1s linear infinite; margin: 15px auto; position: relative; }
+        .carga::after { content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; border: 3px solid #00ccff; border-radius: 50%; animation: girar 0.7s linear reverse; }
+        @keyframes girar { 100% { transform: rotate(360deg); } }
+        /* ANUNCIO PERIÓDICO */
+        #anuncioPeriodico {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            padding: 30px;
+        }
     </style>
 
     <script>
-        // 🔒 CONFIGURACIÓN DE ACCESOS - MODIFICÁ ACÁ TUS DATOS
-        const CLAVE_PREMIUM = "77772233";
-        // ✅ SOLO LOS CORREOS QUE PONGAS ACÁ PODRÁN INGRESAR
-        const CORREOS_PERMITIDOS = [
-            "lucianosala269@gmail.com",    // Tu correo
-            "amigo@correo.com"             // Correo de tu amigo
-            // Agregá más si querés así: , "otro@correo.com"
-        ];
-        let correoAprobado = false;
+        // ==============================================
+        // ✅ TUS DATOS - MODIFICÁ ACÁ SI QUERÉS
+        const CLAVE_INGRESO = "MINI TALENTO 777"; // Clave para entrar al generador
+        const CORREO_PREMIUM = "7772748"; // Tu correo autorizado para Premium
+        const CLAVE_PREMIUM = "7772748"; // Clave para quitar anuncios
+        let esPremium = localStorage.getItem('esPremium') === 'SI';
+        // ==============================================
 
-        // 🔊 SONIDOS
-        function sonidoClick() { document.getElementById('sClick').cloneNode().play(); }
-        function sonidoTecla() { document.getElementById('sTecla').cloneNode().play(); }
+        // 📋 TODAS LAS MARCAS Y MODELOS COMPLETOS
+        const dispositivos = {
+            "Samsung": ["A01","A02","A03","A04","A05","A10","A10s","A11","A12","A13","A14","A20","A20s","A21","A21s","A22","A23","A24","A30","A31","A32","A33","A34","A50","A51","A52","A53","A54","S8","S9","S10","S20","S21","S22","S23","M02","M11","M12","M20","M21","M30","M31","M51"],
+            "Xiaomi": ["Redmi 8","Redmi 9","Redmi 10","Redmi 12","Redmi Note 7","Note 8","Note 9","Note 10","Note 11","Note 12","Poco M3","Poco M4","Poco X3","Poco X4","Mi 9","Mi 10","Mi 11","Mi 12","11 Lite","12 Lite"],
+            "Motorola": ["E6","E7","E20","E22","G7","G8","G9","G10","G20","G22","G30","G40","G50","G52","G60","G82","Edge 20","Edge 30","Moto G84","Moto G54"],
+            "Huawei": ["Y5","Y6","Y7","Y8","Y9","P20","P30","P40","P50","Mate 20","Mate 30","Nova 5","Nova 7","Nova 8","Nova 9","Honor 8X","Honor 10 Lite"],
+            "Oppo": ["A3s","A5","A9","A11","A12","A15","A16","A31","A32","A53","A54","Reno 4","Reno 5","Reno 6","Reno 7","Reno 8"],
+            "Vivo": ["Y11","Y12","Y15","Y17","Y20","Y21","Y22","Y30","Y31","Y50","Y51","V19","V20","V21","V23","X60","X70"],
+            "Realme": ["C2","C3","C11","C12","C15","C21","C25","C30","C31","C35","Narzo 10","Narzo 20","Narzo 30","GT Neo 2","GT Master"],
+            "Infinix": ["Hot 9","Hot 10","Hot 11","Hot 12","Note 7","Note 8","Note 10","Note 11","Zero 8","Zero X","Smart 5","Smart 6"],
+            "Tecno": ["Spark 5","Spark 6","Spark 7","Pouvoir 3","Pouvoir 4","Camon 17","Camon 18","Camon 19"],
+            "LG": ["K22","K42","K52","K61","Q60","Q70","Velvet"]
+        };
 
-        // 📧 VERIFICAR CORREO
-        function verificarCorreo() {
-            sonidoClick();
-            const correo = document.getElementById('correoIngreso').value.trim().toLowerCase();
-            if (CORREOS_PERMITIDOS.includes(correo)) {
-                correoAprobado = true;
-                document.getElementById('seccionCorreo').classList.add('oculto');
-                document.getElementById('seccionClave').classList.remove('oculto');
-            } else {
-                document.getElementById('mensajeAviso').textContent = "❌ CORREO NO AUTORIZADO";
-            }
+        // ⚙️ LÓGICA MEJORADA: SENSIBILIDAD PRECISA POR MARCA/MODELO/GAMA PARA PEGAR ROJOS
+        function calcularSensi(marca, modelo, gama) {
+            // Base calibrada según cómo responde cada marca
+            const porMarca = {
+                "Samsung": { factor: 1.05 },
+                "Xiaomi": { factor: 1.10 },
+                "Motorola": { factor: 0.95 },
+                "Huawei": { factor: 1.00 },
+                "Oppo": { factor: 1.02 },
+                "Vivo": { factor: 1.03 },
+                "Realme": { factor: 1.08 },
+                "Infinix": { factor: 1.12 },
+                "Tecno": { factor: 1.10 },
+                "LG": { factor: 0.98 }
+            };
+
+            const base = {
+                baja: { general: 185, puntoRojo: 180, mira2x: 175, mira4x: 170, francotirador: 155, boton: 41 },
+                media: { general: 170, puntoRojo: 165, mira2x: 160, mira4x: 155, francotirador: 140, boton: 41 },
+                alta: { general: 155, puntoRojo: 150, mira2x: 145, mira4x: 140, francotirador: 125, boton: 41 }
+            };
+
+            const ajuste = base[gama];
+            const factor = porMarca[marca]?.factor || 1;
+            
+            // Ajuste final para máxima precisión sin pasarse
+            return {
+                general: Math.min(200, Math.round(ajuste.general * factor)),
+                puntoRojo: Math.min(200, Math.round(ajuste.puntoRojo * factor)),
+                mira2x: Math.min(200, Math.round(ajuste.mira2x * factor)),
+                mira4x: Math.min(200, Math.round(ajuste.mira4x * factor)),
+                francotirador: Math.min(200, Math.round(ajuste.francotirador * factor)),
+                boton: 41 // SIEMPRE FIJO
+            };
         }
 
-        // 🔑 VERIFICAR CLAVE
-        function verificarClave() {
-            sonidoClick();
-            if (!correoAprobado) return;
-            const clave = document.getElementById('clavePremium').value.trim();
-            if (clave === CLAVE_PREMIUM) {
-                document.getElementById('accesoPremium').classList.add('oculto');
-                document.getElementById('contenidoPremium').classList.remove('oculto');
-            } else {
-                document.getElementById('mensajeAviso').textContent = "❌ CLAVE INCORRECTA";
-            }
-        }
+        // 🎬 CARGA INICIAL
+        window.addEventListener('DOMContentLoaded', () => {
+            // Anuncio 5 segundos
+            setTimeout(() => {
+                document.getElementById('pantallaAnuncio').classList.add('oculto');
+            }, 3000);
 
-        // SONIDO AL ESCRIBIR
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('input').forEach(input => {
-                input.addEventListener('input', sonidoTecla);
+            // Cargar marcas
+            const selMarca = document.getElementById('marca');
+            Object.keys(dispositivos).forEach(marca => {
+                let opt = document.createElement('option');
+                opt.value = marca;
+                opt.textContent = marca;
+                selMarca.appendChild(opt);
             });
+
+            // Cargar modelos al elegir marca
+            document.getElementById('marca').addEventListener('change', () => {
+                const selModelo = document.getElementById('modelo');
+                selModelo.innerHTML = '<option value="">Seleccionar modelo</option>';
+                const m = document.getElementById('marca').value;
+                if(m) dispositivos[m].forEach(mod => {
+                    let opt = document.createElement('option');
+                    opt.value = mod;
+                    opt.textContent = mod;
+                    selModelo.appendChild(opt);
+                });
+                document.getElementById('resultado').classList.add('oculto');
+            });
+
+            // Si ya es Premium, no mostrar anuncios
+            if(esPremium) document.getElementById('btnPremium').textContent = "✅ PREMIUM ACTIVO";
+            else iniciarAnuncios();
         });
+
+        // 📢 ANUNCIOS CADA 1 HORA SI NO ES PREMIUM
+        function iniciarAnuncios() {
+            setInterval(() => {
+                if(!esPremium) document.getElementById('anuncioPeriodico').classList.remove('oculto');
+            }, 600000); // 1 HORA
+        }
+
+        // 🔑 VERIFICAR CLAVE DE INICIO
+        function verificarClaveIngreso() {
+            const clave = document.getElementById('claveIngreso').value.trim().toUpperCase();
+            if(clave === CLAVE_INGRESO) {
+                document.getElementById('pantallaClave').classList.add('oculto');
+                document.getElementById('contenidoTotal').classList.remove('oculto');
+            } else {
+                document.getElementById('mensajeClave').textContent = "❌ CLAVE INCORRECTA";
+            }
+        }
+
+        // 🔓 ACTIVAR PREMIUM
+        function activarPremium() {
+            const correo = document.getElementById('correoPremium').value.trim().toLowerCase();
+            const clave = document.getElementById('clavePremiumIngreso').value.trim();
+            
+            if(correo === CORREO_PREMIUM && clave === CLAVE_PREMIUM) {
+                esPremium = true;
+                localStorage.setItem('esPremium', 'SI');
+                document.getElementById('pantallaPremium').classList.add('oculto');
+                document.getElementById('btnPremium').textContent = "✅ PREMIUM";
+            } else {
+                document.getElementById('mensajePremium').textContent = "❌ ACCESO DENEGADO";
+            }
+        }
+
+        // 🎯 GENERAR SENSIBILIDAD
+        function generarSensibilidad() {
+            const marca = document.getElementById('marca').value;
+            const modelo = document.getElementById('modelo').value;
+            const gama = document.getElementById('gama').value;
+            const aviso = document.getElementById('avisoCampos');
+
+            if(!marca || !modelo || !gama) {
+                aviso.textContent = "⚠️ COMPLETÁ TODOS LOS CAMPOS";
+                return;
+            }
+            aviso.textContent = "";
+
+            document.getElementById('cargaGeneracion').classList.remove('oculto');
+            document.getElementById('resultado').classList.add('oculto');
+
+            setTimeout(() => {
+                const sensi = calcularSensi(marca, modelo, gama);
+                document.getElementById('valGeneral').textContent = sensi.general;
+                document.getElementById('valPunto').textContent = sensi.puntoRojo;
+                document.getElementById('val2x').textContent = sensi.mira2x;
+                document.getElementById('val4x').textContent = sensi.mira4x;
+                document.getElementById('valSniper').textContent = sensi.francotirador;
+                document.getElementById('valBoton').textContent = sensi.boton;
+
+                document.getElementById('cargaGeneracion').classList.add('oculto');
+                document.getElementById('resultado').classList.remove('oculto');
+            }, 1500);
+        }
     </script>
 </head>
 <body>
 
-    <!-- 🔊 ARCHIVOS DE SONIDO (NO TOCAR) -->
-    <audio id="sClick" preload="auto">
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+P1+vR/4A" type="audio/wav">
-    
-    <audio id="sTecla" preload="auto">
-        <source src="data:audio/wav;base64,UklGRigGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ4GAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+P1+vR/4A" type="audio/wav">
-    
+    <!-- FONDO MATRIX -->
+    <canvas id="fondoMatrix"></canvas>
+    <script>
+        const canvas = document.getElementById('fondoMatrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const tam = 16;
+        const columnas = canvas.width/tam;
+        const lluvia = [];
+        for(let i=0; i<columnas; i++) lluvia[i] = 1;
+        function dibujar(){
+            ctx.fillStyle='rgba(0,0,0,0.05)';
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle='#00ff00';
+            ctx.font = tam+'px monospace';
+            for(let i=0; i<lluvia.length; i++){
+                const texto = letras[Math.floor(Math.random()*letras.length)];
+                ctx.fillText(texto, i*tam, lluvia[i]*tam);
+                if(lluvia[i]*tam>canvas.height && Math.random()>0.975) lluvia[i]=0;
+                lluvia[i]++;
+            }
+        }
+        setInterval(dibujar, 50);
+    </script>
 
-    <!-- 🎬 PANTALLA DE ACCESO PREMIUM -->
-    <div id="accesoPremium" class="centrar">
-        <h1>🔒 ACCESO PREMIUM</h1>
-
-        <!-- PASO 1: PEDIR CORREO -->
-        <div id="seccionCorreo">
-            <h2>Poné tu correo autorizado</h2>
-            <input type="email" id="correoIngreso" placeholder="ejemplo@correo.com" required>
-            <button onclick="verificarCorreo()">✅ CONFIRMAR CORREO</button>
-        </div>
-
-        <!-- PASO 2: PEDIR CLAVE (SOLO SI CORREO ES CORRECTO) -->
-        <div id="seccionClave" class="oculto">
-            <h2>Ahora poné tu clave</h2>
-            <input type="password" id="clavePremium" placeholder="Tu clave de acceso" required>
-            <button onclick="verificarClave()">🔓 DESBLOQUEAR</button>
-        </div>
-
-        <div id="mensajeAviso" class="aviso"></div>
+    <!-- 🎬 ANUNCIO DE INICIO -->
+    <div id="pantallaAnuncio">
+        <div>BIENVENIDOS</div>
+        <div>A MI</div>
+        <div>GENERADOR DE SENCI</div>
+        <div class="marca-logo">MINI TALENTO 777</div>
     </div>
 
-    <!-- ✅ LO QUE SE VE CUANDO YA INGRESASTE -->
-    <div id="contenidoPremium" class="oculto centrar">
-        <h1>✅ BIENVENIDO A MINI TALENTO 777</h1>
-        <p style="margin: 20px 0; text-align:center;">Acá está todo tu generador y funciones premium listas para usar</p>
-        <!-- Acá seguís agregando todo lo demás del generador que ya tenías -->
+    <!-- 🔑 PANTALLA DE CLAVE DE INGRESO -->
+    <div id="pantallaClave" class="centrar">
+        <div class="marca-logo">MINI TALENTO 777</div>
+        <h2>INGRESÁ LA CLAVE DE ACCESO</h2>
+        <input type="text" id="claveIngreso" placeholder="Escribí la clave aquí" style="text-align:center; font-size:18px;">
+        <button onclick="verificarClaveIngreso()">🔓 ENTRAR AL GENERADOR</button>
+        <div id="mensajeClave" class="aviso"></div>
+    </div>
+
+    <!-- ✅ CONTENIDO PRINCIPAL -->
+    <div id="contenidoTotal" class="oculto">
+        <button id="btnPremium" onclick="document.getElementById('pantallaPremium').classList.remove('oculto')">🔒 PREMIUM</button>
+
+        <div class="centrar">
+            <div class="marca-logo">MINI TALENTO 777</div>
+            <h2>GENERADOR DE SENSIBILIDAD FREE FIRE</h2>
+
+            <select id="marca">
+                <option value="">Seleccionar Marca</option>
+            </select>
+
+            <select id="modelo">
+                <option value="">Primero elegí la marca</option>
+            </select>
+
+            <select id="gama">
+                <option value="">Seleccionar Gama</option>
+                <option value="baja">Gama Baja</option>
+                <option value="media">Gama Media</option>
+                <option value="alta">Gama Alta</option>
+            </select>
+
+            <div id="avisoCampos" class="aviso"></div>
+            <button onclick="generarSensibilidad()">⚡ GENERAR SENSIBILIDAD PRECISA</button>
+            <div id="cargaGeneracion" class="carga oculto"></div>
+
+            <div id="resultado" class="resultado oculto">
+                <h3>✅ SENSIBILIDAD CALIBRADA PARA TU DISPOSITIVO</h3>
+                <p>General: <strong id="valGeneral"></strong></p>
+                <p>Punto Rojo: <strong id="valPunto"></strong></p>
+                <p>Mira 2x: <strong id="val2x"></strong></p>
+                <p>Mira 4x: <strong id="val4x"></strong></p>
+                <p>Francotirador: <strong id="valSniper"></strong></p>
+                <p style="color: #ff0000; font-weight: bold; font-size:19px;">👉 Botón de Disparo: <strong id="valBoton"></strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔒 PANTALLA PREMIUM -->
+    <div id="pantallaPremium" class="centrar oculto" style="background:rgba(0,0,0,0.98); position:fixed; top:0; left:0; width:100%; height:100%; z-index:999;">
+        <h2>🔒 ACTIVAR MODO PREMIUM</h2>
+        <input type="email" id="correoPremium" placeholder="Tu correo autorizado">
+        <input type="password" id="clavePremiumIngreso" placeholder="Clave Premium">
+        <button onclick="activarPremium()">✅ ACTIVAR SIN ANUNCIOS</button>
+        <button onclick="document.getElementById('pantallaPremium').classList.add('oculto')" style="background:#333;">❌ VOLVER</button>
+        <div id="mensajePremium" class="aviso"></div>
+    </div>
+
+    <!-- 📢 ANUNCIO PERIÓDICO -->
+    <div id="anuncioPeriodico" class="oculto">
+        <div class="marca-logo">MINI TALENTO 777</div>
+        <p>🔔 ANUNCIO - OBTENÉ PREMIUM PARA NO VER MÁS NUNCA ANUNCIOS</p>
+        <button onclick="document.getElementById('anuncioPeriodico').classList.add('oculto')">✅ CERRAR Y SEGUIR</button>
     </div>
 
 </body>
