@@ -75,7 +75,7 @@
 
     // 🔑 CLAVE ENCRIPTADA - NO APARECE EN CÓDIGO VISIBLE
     const _ = atob;
-    const CLAVE_ENCRIPTADA = _('NTAxNzM1MzM=');
+   const CLAVE_ENCRIPTADA = _('THVDU05BTjc3');
     function verificarClaveSegura(valor) {
       if (!valor) return false;
       return btoa(valor.trim()) === CLAVE_ENCRIPTADA;
