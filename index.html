@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MINI TALENTO 777 - ACTUALIZADO 3.9.8</title>
+    <title>MINI TALENTO 777 -ACTUALIZADO</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; font-weight: bold; }
         html, body {
@@ -84,7 +84,7 @@
         }
         .opcion span { color: #ff0000; }
 
-        /* 🎮 BOTONES DE MODOS DE JUEGO - NUEVOS Y CHIQUITOS */
+        /* 🎮 BOTONES DE MODOS DE JUEGO - NUEVO BOTÓN AGREGADO */
         .contenedor-botones {
             display: flex;
             flex-wrap: wrap;
@@ -147,8 +147,8 @@
         // ==============================================
         // ✅ DATOS Y CLAVES - TODO INTACTO
         const CLAVE_INGRESO = "777";
-        const CORREO_PREMIUM = "769584";
-        const CLAVE_PREMIUM = "769584";
+        const CORREO_PREMIUM = "6545";
+        const CLAVE_PREMIUM = "6445";
         let esPremium = localStorage.getItem('esPremium') === 'SI';
         const TIEMPO_ANUNCIO = 2 * 60 * 60 * 1000;
         const TIEMPO_CIERRE_ANUNCIO = 3000;
@@ -157,7 +157,7 @@
 
         // ✨ ANIMACIÓN TEXTO ACTUALIZADO - INTACTA
         function animarActualizado() {
-            const texto = "ACTUALIZADO V3.9.8";
+            const texto = "ACTUALIZADO";
             const elemento = document.getElementById('textoActualizado');
             let indice = 0;
             function escribir() {
@@ -199,7 +199,7 @@
             "iPhone": ["iPhone 6","6 Plus","6s","6s Plus","SE 1ª Gen","7","7 Plus","8","8 Plus","X","XR","XS","XS Max","11","11 Pro","11 Pro Max","SE 2ª Gen","12 Mini","12","12 Pro","12 Pro Max","13 Mini","13","13 Pro","13 Pro Max","SE 3ª Gen","14","14 Plus","14 Pro","14 Pro Max","15","15 Plus","15 Pro","15 Pro Max"]
         };
 
-        // ⚙️ LÓGICA EXCLUSIVA PARA CADA MODO DE JUEGO
+        // ⚙️ LÓGICA CON EL NUEVO MODO UMP Y ESCOPETA AGREGADO
         function calcularSensi(marca, modelo, modo) {
             // Factores por marca adaptados a cada pantalla
             const porMarca = {
@@ -211,7 +211,7 @@
                 "Nubia": { factor: 1.00 }, "ZTE": { factor: 1.09 }, "iPhone": { factor: 0.95 }
             };
 
-            // VALORES ESPECIALES PARA CADA MODO COMO PEDISTE
+            // VALORES INCLUYENDO EL NUEVO MODO PARA UMP Y M1887
             const modos = {
                 "pvp": {
                     nombre: "PVP - SALAS Y COMBATE",
@@ -232,6 +232,11 @@
                     nombre: "1 VS 6 - MODO MÁXIMO PODER",
                     descripcion: "Más precisión, mira directa a la cabeza, gana rondas fácilmente",
                     general: 195, puntoRojo: 192, mira2x: 187, mira4x: 181, francotirador: 165, camara360: 198, boton: 44
+                },
+                "ump": {
+                    nombre: "🔥 UMP Y ESCOPETA M1887",
+                    descripcion: "Sensibilidad PELIGROSA: subida rápida y directa a la cabeza para armas cortas",
+                    general: 198, puntoRojo: 196, mira2x: 185, mira4x: 175, francotirador: 140, camara360: 199, boton: 45
                 }
             };
 
@@ -414,7 +419,7 @@
 
             <div class="panel-terminal">
                 <div class="titulo-ascii">MINI TALENTO 777</div>
-                <div class="subtitulo">v2.0 | Modos exclusivos para cada partida</div>
+                <div class="subtitulo">v2.1 | Nuevo modo UMP y Escopeta M1887</div>
                 <div class="linea-roja"></div>
 
                 <div class="opcion"><span>1]</span> Seleccionar Marca</div>
@@ -429,6 +434,7 @@
                     <button class="boton-modo" data-modo="br">🗺️ BR</button>
                     <button class="boton-modo" data-modo="de">🏙️ DE</button>
                     <button class="boton-modo" data-modo="1vs6">🔥 1VS6</button>
+                    <button class="boton-modo" data-modo="ump">🔫 UMP/ESCOPETA</button>
                 </div>
 
                 <div class="linea-roja"></div>
