@@ -1,717 +1,275 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MINI TALENTO 777</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MOD1F LUXT1N - Modificaciones para tu celular</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; font-weight: bold; }
-        html, body {
-            min-height: 100vh;
-            color: #fff;
-            overflow-x: hidden;
-            background-color: #000;
-            background-attachment: fixed;
+        /* Estilos generales */
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #eee;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .oculto { display: none !important; }
-        .centrar { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 15px; min-height: 100vh; position: relative; }
 
-        #textoActualizadoMini {
+        /* Contenedor del anuncio */
+        #splash {
             position: absolute;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #ff0000;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 2.5rem;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            letter-spacing: 2px;
-            white-space: nowrap;
-            text-shadow: 0 0 8px #ff0000;
+            text-align: center;
+            padding: 0 20px;
+            animation: pulseBackground 5s ease-in-out forwards;
             z-index: 10;
         }
-        #textoActualizadoLuxtin {
-            position: absolute;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2.5rem;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            letter-spacing: 2px;
-            white-space: nowrap;
-            z-index: 10;
-            transition: all 1s ease;
+
+        /* Animación de fondo sorpresivo (color y brillo) */
+        @keyframes pulseBackground {
+            0%, 100% {
+                background: linear-gradient(135deg, #ff416c, #ff4b2b);
+                filter: brightness(1);
+            }
+            50% {
+                background: linear-gradient(135deg, #1f4037, #99f2c8);
+                filter: brightness(1.3);
+            }
         }
 
-        #fondoMatrix { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; }
-        #fondoLuxtin {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3;
-            background: url('fondo-2.png') center/cover no-repeat fixed;
-            opacity: 0.85;
+        /* Contenedor principal del chat */
+        #mainApp {
+            display: none;
+            width: 90%;
+            max-width: 600px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255,75,43,0.6);
+            padding: 20px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        #codigosFlotantesMini { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; font-size: 13px; color: #0f0; pointer-events: none; }
-        #codigosFlotantesLuxtin { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; opacity: 0.3; font-size: 13px; pointer-events: none; transition: color 1s ease; }
-
-        #pantallaInicio, #pantallaPremium, #anuncioPeriodico, #preguntasLuxtin {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.92); z-index: 9999;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;
-        }
-        .panel-terminal {
-            width: 100%; max-width: 480px;
-            background: rgba(0,0,0,0.6);
-            border: 3px solid #ff0000;
-            padding: 20px 15px;
-            position: relative;
-            margin-top: 140px;
-        }
-        .panel-terminal.luxtin {
-            background: rgba(0,0,0,0.7);
-            margin-top: 20px;
-            border: 3px solid var(--color-luxtin);
-            transition: border-color 1s ease;
-        }
-        .linea-roja {
-            height: 3px;
-            background: repeating-linear-gradient(90deg, #ff0000, #ff0000 8px, transparent 8px, transparent 16px);
-            margin: 12px 0;
-        }
-        .linea-roja.luxtin {
-            background: repeating-linear-gradient(90deg, var(--color-luxtin), var(--color-luxtin) 8px, transparent 8px, transparent 16px);
-            transition: background 1s ease;
-        }
-        .titulo-ascii {
-            font-size: 4.5vw;
-            line-height: 1;
-            text-align: center;
-            color: #fff;
-            text-shadow: 0 0 8px #ff0000;
-            margin: 10px 0;
-            letter-spacing: 2px;
-        }
-        .titulo-ascii.luxtin {
-            text-shadow: 0 0 8px var(--color-luxtin);
-            transition: text-shadow 1s ease;
-        }
-        .subtitulo {
-            text-align: center;
-            color: #ff0000;
-            font-size: 1.1rem;
+        /* Chat messages */
+        #chat {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 10px;
             margin-bottom: 15px;
         }
-        .subtitulo.luxtin {
-            color: var(--color-luxtin);
-            transition: color 1s ease;
-        }
-        .opcion {
-            font-size: 1.2rem;
-            margin: 10px 0;
-            color: #fff;
-        }
-        .opcion span { color: #ff0000; }
-        .opcion.luxtin span {
-            color: var(--color-luxtin);
-            transition: color 1s ease;
+
+        .message {
+            background-color: #ff4b2b;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 15px;
+            max-width: 80%;
+            font-size: 1rem;
+            line-height: 1.4;
+            box-shadow: 0 0 8px rgba(255,75,43,0.7);
         }
 
-        .contenedor-botones {
-            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 10px 0;
-        }
-        .boton-modo {
-            width: auto; min-width: 90px; padding: 8px 12px; font-size: 1rem; margin: 0;
-        }
-        .boton-modo.activo {
-            background: #ff3333; box-shadow: 0 0 12px #ff0000; transform: scale(1.05);
-        }
-        .boton-modo.luxtin {
-            border: 2px solid var(--color-luxtin);
-            background: rgba(20,20,20,0.8);
-            color: var(--color-luxtin);
-            transition: all 1s ease;
-        }
-        .boton-modo.luxtin.activo {
-            background: var(--color-luxtin);
-            color: #000;
-            box-shadow: 0 0 15px var(--color-luxtin);
-            transform: scale(1.05);
+        .message.bot {
+            background-color: #ff7043;
+            align-self: flex-start;
         }
 
-        input, select, button {
-            width: 100%; max-width: 380px; padding: 12px; margin: 8px auto; display:block;
-            border: 2px solid #ff0000; border-radius: 0;
-            font-size: 1.1rem; background: #111; color: #fff; font-family: inherit;
-        }
-        input.luxtin, select.luxtin, button.luxtin {
-            border-color: var(--color-luxtin);
-            transition: border-color 1s ease;
-        }
-        select:disabled { background: #0a0a0a; color: #555; border-color: #333; cursor: not-allowed; }
-        select option { background: #000; color: #fff; }
-        button { background: #ff0000; cursor: pointer; transition: 0.1s; }
-        button.luxtin {
-            background: var(--color-luxtin);
-            color: #000;
-            transition: all 1s ease;
-        }
-        button:disabled { background: #440000; color: #777; border-color: #550000; cursor: not-allowed; }
-        button.luxtin:disabled {
-            background: rgba(40,40,40,0.8);
-            color: #444;
-            border-color: #333;
-            cursor: not-allowed;
-        }
-        button:hover:not(:disabled):not(.boton-modo) { background: #ff3333; box-shadow: 0 0 10px #ff0000; }
-        button.luxtin:hover:not(:disabled):not(.boton-modo) {
-            filter: brightness(1.2);
-            box-shadow: 0 0 12px var(--color-luxtin);
+        .message.user {
+            background-color: #ff3b1f;
+            align-self: flex-end;
         }
 
-        .resultado {
-            background: rgba(5,5,5,0.8); padding: 15px; margin-top: 15px;
-            border: 2px solid #ff0000; font-size: 1.1rem; line-height: 1.6;
-        }
-        .resultado.luxtin {
-            border-color: var(--color-luxtin);
-            transition: border-color 1s ease;
-        }
-        .resultado strong { color: #0f0; }
-        .resultado.luxtin strong {
-            color: var(--color-luxtin);
-            transition: color 1s ease;
-        }
-        .aviso { color: #ff0000; text-align: center; margin: 8px 0; }
-        .aviso.luxtin {
-            color: var(--color-luxtin);
-            transition: color 1s ease;
-        }
-        .texto-ia { display: none; }
-
-        .carga-siri {
-            width: 60px; height: 60px; margin: 15px auto; position: relative;
-        }
-        .carga-siri::before, .carga-siri::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            border: 3px solid transparent; border-top-color: #fff; border-radius: 50%;
-            animation: girar 1.2s linear infinite;
-        }
-        .carga-siri::after { border-top-color: #ff0000; animation-duration: 0.8s; animation-direction: reverse; }
-        .carga-siri.luxtin::after {
-            border-top-color: var(--color-luxtin);
-            transition: border-top-color 1s ease;
-        }
-        @keyframes girar { 100% { transform: rotate(360deg); } }
-
-        #btnPremium { position: fixed; top: 10px; left: 10px; width: auto; padding: 5px 10px; font-size: 0.9rem; border: 1px solid #ff0000; z-index: 15; }
-        #btnVolverMini {
-            position: fixed; top: 10px; left: 10px; width: auto; padding: 5px 10px; font-size: 0.9rem;
-            border: 1px solid var(--color-luxtin); z-index: 15;
-            background: #222; color: var(--color-luxtin);
-            transition: all 1s ease;
+        /* Input area */
+        #inputArea {
+            display: flex;
+            gap: 10px;
         }
 
-        :root {
-            --color-luxtin: #b040ff;
+        #deviceInput {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 0 8px rgba(255,75,43,0.5);
+            background-color: #2a2a2a;
+            color: white;
+        }
+
+        #sendBtn {
+            background-color: #ff4b2b;
+            border: none;
+            padding: 0 25px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255,75,43,0.9);
+            transition: background-color 0.3s ease;
+        }
+
+        #sendBtn:hover {
+            background-color: #ff6f57;
+        }
+
+        /* Scrollbar styling */
+        #chat::-webkit-scrollbar {
+            width: 8px;
+        }
+        #chat::-webkit-scrollbar-thumb {
+            background-color: #ff4b2b;
+            border-radius: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            #splash {
+                font-size: 1.8rem;
+            }
+            #mainApp {
+                height: 90vh;
+            }
         }
     </style>
-
-    <script>
-        const CLAVE_INGRESO_MINI = "777";
-        const CORREO_SIN_ANUNCIOS = "KEYMXIMI829U8DNMDK8";
-        const CLAVE_SIN_ANUNCIOS = "key837edjdinm738764";
-        const CLAVE_ABRIR_LUXTIN = "50173533";
-        let esSinAnuncios = localStorage.getItem('esSinAnuncios') === 'SI';
-        const TIEMPO_ANUNCIO = 2 * 60 * 60 * 1000;
-        const TIEMPO_CIERRE_ANUNCIO = 3000;
-        const TIEMPO_CAMBIO_COLOR = 10 * 60 * 1000;
-
-        const coloresLuxtin = ['#b040ff', '#ff3a3a', '#3aff5a'];
-        let indiceColorActual = 0;
-        function aplicarColorLuxtin() {
-            const color = coloresLuxtin[indiceColorActual];
-            document.documentElement.style.setProperty('--color-luxtin', color);
-            document.getElementById('textoActualizadoLuxtin').style.color = color;
-            document.getElementById('codigosFlotantesLuxtin').style.color = color;
-        }
-        function iniciarCicloColores() {
-            aplicarColorLuxtin();
-            setInterval(() => {
-                indiceColorActual = (indiceColorActual + 1) % coloresLuxtin.length;
-                aplicarColorLuxtin();
-            }, TIEMPO_CAMBIO_COLOR);
-        }
-
-        const dispositivos = {
-            "Samsung": ["A01","A02","A03","A04","A05","A10","A10s","A11","A12","A13","A14","A20","A20s","A21","A21s","A22","A23","A24","A30","A31","A32","A33","A34","A50","A51","A52","A53","A54","A70","A71","A72","A73","S8","S9","S10","S20","S21","S22","S23","S24","Note 9","Note 10","Note 20","M02","M11","M12","M20","M21","M30","M31","M51"],
-            "Xiaomi": ["Redmi 8","Redmi 9","Redmi 10","Redmi 12","Redmi 13","Redmi Note 7","Note 8","Note 9","Note 10","Note 11","Note 12","Note 13","Poco M3","Poco M4","Poco M5","Poco X3","Poco X4","Poco X5","Mi 9","Mi 10","Mi 11","Mi 12","Mi 13","11 Lite","12 Lite","13 Lite"],
-            "Motorola": ["E6","E7","E20","E22","E32","G7","G8","G9","G10","G20","G22","G30","G40","G50","G52","G60","G82","G84","Edge 20","Edge 30","Edge 40","Moto G54","Moto G84"],
-            "Huawei": ["Y5","Y6","Y7","Y8","Y9","P20","P30","P40","P50","P60","Mate 20","Mate 30","Mate 40","Nova 5","Nova 7","Nova 8","Nova 9","Nova 10","Honor 8X","Honor 10 Lite","Honor X7","Honor X8"],
-            "Oppo": ["A3s","A5","A9","A11","A12","A15","A16","A31","A32","A53","A54","A74","Reno 4","Reno 5","Reno 6","Reno 7","Reno 8","Reno 9","Find X3","Find X5"],
-            "Vivo": ["Y11","Y12","Y15","Y17","Y20","Y21","Y22","Y30","Y31","Y50","Y51","Y72","V19","V20","V21","V23","V25","X60","X70","X80"],
-            "Realme": ["C2","C3","C11","C12","C15","C21","C25","C30","C31","C35","C53","Narzo 10","Narzo 20","Narzo 30","Narzo 50","GT Neo 2","GT Neo 3","GT Master"],
-            "Infinix": ["Hot 9","Hot 10","Hot 11","Hot 12","Hot 20","Note 7","Note 8","Note 10","Note 11","Note 12","Note 30","Note 40","Note 40 Pro","Zero 8","Zero X","Zero 30","Smart 5","Smart 6","Smart 7"],
-            "Tecno": ["Spark 5","Spark 6","Spark 7","Spark 8","Pouvoir 3","Pouvoir 4","Pouvoir 5","Camon 17","Camon 18","Camon 19","Camon 20","Phantom X"],
-            "Itel": ["A23","A33","Vision 1","Vision 2","Vision 3","Power 40","Power 55"],
-            "LG": ["K22","K42","K52","K61","Q60","Q70","Velvet","Wing"],
-            "Sony": ["Xperia L1","L3","L4","10","10 II","10 III","5","5 II","5 III","1","1 II","1 III"],
-            "Asus": ["Zenfone Max","Zenfone 8","Zenfone 9","Zenfone 10","ROG Phone 3","ROG Phone 5","ROG Phone 6"],
-            "Lenovo": ["Vibe K5","Moto Tab","Legion Duel","Legion Y70"],
-            "Google": ["Pixel 3","4","4a","5","5a","6","6a","7","7a","8","8 Pro"],
-            "Nubia": ["Red Magic 5G","6","6 Pro","7","7 Pro","Z50"],
-            "ZTE": ["Blade A5","A7","V20","Axon 20","Axon 30"],
-            "iPhone": ["iPhone 6","6 Plus","6s","6s Plus","SE 1ª Gen","7","7 Plus","8","8 Plus","X","XR","XS","XS Max","11","11 Pro","11 Pro Max","SE 2ª Gen","12 Mini","12","12 Pro","12 Pro Max","13 Mini","13","13 Pro","13 Pro Max","SE 3ª Gen","14","14 Plus","14 Pro","14 Pro Max","15","15 Plus","15 Pro","15 Pro Max"]
-        };
-
-        function calcularSensiMini(marca, modelo, modo) {
-            const porMarca = {
-                "Samsung": { factor: 1.07 }, "Xiaomi": { factor: 1.10 }, "Motorola": { factor: 1.05 },
-                "Huawei": { factor: 1.06 }, "Oppo": { factor: 1.08 }, "Vivo": { factor: 1.08 },
-                "Realme": { factor: 1.09 }, "Infinix": { factor: 1.12 }, "Tecno": { factor: 1.11 },
-                "Itel": { factor: 1.13 }, "LG": { factor: 1.04 }, "Sony": { factor: 1.03 },
-                "Asus": { factor: 1.02 }, "Lenovo": { factor: 1.04 }, "Google": { factor: 1.02 },
-                "Nubia": { factor: 1.02 }, "ZTE": { factor: 1.11 }, "iPhone": { factor: 0.97 }
-            };
-            const modos = {
-                "pvp": { nombre: "PVP - SALAS Y COMBATE", descripcion: "Más rápida, levanta mira fácil y pega rojo en enfrentamientos", general: 192, puntoRojo: 190, mira2x: 185, mira4x: 178, francotirador: 162, camara360: 195, boton: 42 },
-                "br": { nombre: "BR - MAPAS GRANDES", descripcion: "Rápida y precisa, llega a la cabeza desde cualquier distancia", general: 182, puntoRojo: 178, mira2x: 172, mira4x: 168, francotirador: 172, camara360: 185, boton: 41 },
-                "de": { nombre: "DE - MAPAS MEDIANOS", descripcion: "Máxima respuesta, mira se pega a la cabeza al moverte", general: 188, puntoRojo: 185, mira2x: 180, mira4x: 174, francotirador: 160, camara360: 190, boton: 42 },
-                "1vs6": { nombre: "🔥 1 VS 6 - MODO HACKER", descripcion: "SENSIBILIDAD POTENTE: al levantar la mira VA DIRECTO A LA CABEZA, mata uno por uno sin esfuerzo", general: 200, puntoRojo: 199, mira2x: 195, mira4x: 190, francotirador: 172, camara360: 200, boton: 44 },
-                "ump": { nombre: "💥 UMP Y ESCOPETA M1887 - TODO ROJO", descripcion: "SUBIDA INSTANTÁNEA: cada disparo se clava en la cabeza, no fallas ni un tiro", general: 200, puntoRojo: 200, mira2x: 192, mira4x: 185, francotirador: 150, camara360: 200, boton: 45 }
-            };
-            const ajuste = modos[modo];
-            const factor = porMarca[marca]?.factor || 1;
-            return {
-                ...ajuste,
-                general: Math.min(200, Math.max(1, Math.round(ajuste.general * factor))),
-                puntoRojo: Math.min(200, Math.max(1, Math.round(ajuste.puntoRojo * factor))),
-                mira2x: Math.min(200, Math.max(1, Math.round(ajuste.mira2x * factor))),
-                mira4x: Math.min(200, Math.max(1, Math.round(ajuste.mira4x * factor))),
-                francotirador: Math.min(200, Math.max(1, Math.round(ajuste.francotirador * factor))),
-                camara360: Math.min(200, Math.max(1, Math.round(ajuste.camara360 * factor)))
-            };
-        }
-
-        let datosTemporales = { marca: "", modelo: "", modo: "", nivel: "" };
-        const baseDatosFreeFire = {
-            movilidad: {
-                "Samsung": { alto: 1.12, medio: 1.05, bajo: 0.98 },
-                "Xiaomi": { alto: 1.15, medio: 1.08, bajo: 1.01 },
-                "Motorola": { alto: 1.10, medio: 1.04, bajo: 0.97 },
-                "Huawei": { alto: 1.11, medio: 1.05, bajo: 0.98 },
-                "Oppo": { alto: 1.13, medio: 1.06, bajo: 0.99 },
-                "Vivo": { alto: 1.13, medio: 1.06, bajo: 0.99 },
-                "Realme": { alto: 1.14, medio: 1.07, bajo: 1.00 },
-                "Infinix": { alto: 1.16, medio: 1.09, bajo: 1.02 },
-                "Tecno": { alto: 1.15, medio: 1.08, bajo: 1.01 },
-                "Itel": { alto: 1.17, medio: 1.10, bajo: 1.03 },
-                "LG": { alto: 1.09, medio: 1.03, bajo: 0.96 },
-                "Sony": { alto: 1.08, medio: 1.02, bajo: 0.95 },
-                "Asus": { alto: 1.07, medio: 1.01, bajo: 0.94 },
-                "Lenovo": { alto: 1.09, medio: 1.03, bajo: 0.96 },
-                "Google": { alto: 1.07, medio: 1.01, bajo: 0.94 },
-                "Nubia": { alto: 1.07, medio: 1.01, bajo: 0.94 },
-                "ZTE": { alto: 1.15, medio: 1.08, bajo: 1.01 },
-                "iPhone": { alto: 1.05, medio: 0.99, bajo: 0.93 }
-            },
-            baseModos: {
-                "pvp": {
-                    nombre: "PVP - COMBATE RÁPIDO",
-                    descripcion: "Equilibrada para salas y enfrentamientos directos, levanta mira sin sobrepasar la cabeza",
-                    valores: { alto: [195,192,188,182,170,197], medio: [185,182,178,172,160,188], bajo: [175,172,168,162,150,178] }
-                },
-                "br": {
-                    nombre: "BR - MAPAS GRANDES",
-                    descripcion: "Precisión a larga distancia, se mantiene estable al apuntar desde lejos",
-                    valores: { alto: [190,188,185,180,178,192], medio: [180,178,175,170,168,182], bajo: [170,168,165,160,158,172] }
-                },
-                "de": {
-                    nombre: "DE - MAPAS MEDIANOS",
-                    descripcion: "Respuesta rápida para moverte y disparar sin perder el control",
-                    valores: { alto: [193,190,187,183,168,195], medio: [183,180,177,173,158,185], bajo: [173,170,167,163,148,175] }
-                },
-                "1vs6": {
-                    nombre: "🔥 1VS6 - MODO INTENSO",
-                    descripcion: "Alta velocidad para cambiar de objetivo rápido, pero ajustada para no fallar la cabeza",
-                    valores: { alto: [198,197,194,190,175,199], medio: [190,188,185,180,165,192], bajo: [180,178,175,170,155,182] }
-                },
-                "ump": {
-                    nombre: "💥 UMP/ESCOPETA - CORTA DISTANCIA",
-                    descripcion: "Subida controlada: cada disparo se clava en el casco sin dispersión",
-                    valores: { alto: [197,198,192,185,160,199], medio: [188,190,182,175,150,190], bajo: [178,180,172,165,140,180] }
-                }
-            }
-        };
-
-        // FUNCIÓN DE SENSI VUELTA A LA VERSIÓN ORIGINAL (SIN ERRORES)
-        function calcularSensiLuxtinIA(marca, modelo, modo, nivel) {
-            const base = baseDatosFreeFire.baseModos[modo];
-            const factMov = baseDatosFreeFire.movilidad[marca][nivel];
-            const vals = base.valores[nivel];
-            const variacion = () => (Math.random() * 4) - 2;
-
-            return {
-                nombre: base.nombre,
-                descripcion: base.descripcion,
-                general: Math.min(200, Math.max(1, Math.round(vals[0] * factMov + variacion()))),
-                puntoRojo: Math.min(200, Math.max(1, Math.round(vals[1] * factMov + variacion()))),
-                mira2x: Math.min(200, Math.max(1, Math.round(vals[2] * factMov + variacion()))),
-                mira4x: Math.min(200, Math.max(1, Math.round(vals[3] * factMov + variacion()))),
-                francotirador: Math.min(200, Math.max(1, Math.round(vals[4] * factMov + variacion()))),
-                camara360: Math.min(200, Math.max(1, Math.round(vals[5] * factMov + variacion()))),
-                boton: nivel === "alto" ? 48 + Math.floor(Math.random() * 3) : nivel === "medio" ? 45 + Math.floor(Math.random() * 3) : 42 + Math.floor(Math.random() * 3)
-            };
-        }
-
-        function iniciarAnuncios() {
-            setInterval(() => {
-                if(!esSinAnuncios) {
-                    document.getElementById('anuncioPeriodico').classList.remove('oculto');
-                    setTimeout(() => {
-                        document.getElementById('anuncioPeriodico').classList.add('oculto');
-                    }, TIEMPO_CIERRE_ANUNCIO);
-                }
-            }, TIEMPO_ANUNCIO);
-        }
-        function animarActualizadoMini() {
-            const texto = "ACTUALIZADO - MODO HACKER";
-            const el = document.getElementById('textoActualizadoMini');
-            let i=0;
-            function escribir(){
-                if(i<texto.length){el.textContent=texto.substring(0,i+1);i++;setTimeout(escribir,120);}
-                else{el.textContent=texto+"...";setTimeout(()=>{el.textContent="";i=0;setTimeout(escribir,500);},1500);}
-            } escribir();
-        }
-        function animarActualizadoLuxtin() {
-            const texto = "LUXTIN - IA INTELIGENTE ACTIVA";
-            const el = document.getElementById('textoActualizadoLuxtin');
-            let i=0;
-            function escribir(){
-                if(i<texto.length){el.textContent=texto.substring(0,i+1);i++;setTimeout(escribir,120);}
-                else{el.textContent=texto+"...";setTimeout(()=>{el.textContent="";i=0;setTimeout(escribir,500);},1500);}
-            } escribir();
-        }
-        function animarCodigosMini() {
-            const cont = document.getElementById('codigosFlotantesMini');
-            const cod = ['01001011','aimbot_head()','mov eax, 200','// MINI TALENTO','todo_rojo = true;'];
-            setInterval(() => {
-                const d=document.createElement('div');d.textContent=cod[Math.floor(Math.random()*cod.length)];
-                d.style.position='absolute';d.style.left=Math.random()*100+'%';d.style.top='-20px';cont.appendChild(d);
-                let alt=-20;const bajar=setInterval(()=>{alt+=1.5;d.style.top=alt+'px';if(alt>window.innerHeight){clearInterval(bajar);cont.removeChild(d);}},50);
-            },400);
-        }
-        function animarCodigosLuxtin() {
-            const cont = document.getElementById('codigosFlotantesLuxtin');
-            const cod = ['ia_ajuste()','sensi_unica()','control_cabeza=100%','// LUXTIN INTELIGENTE','sin_fallo=true;'];
-            setInterval(() => {
-                const d=document.createElement('div');d.textContent=cod[Math.floor(Math.random()*cod.length)];
-                d.style.position='absolute';d.style.left=Math.random()*100+'%';d.style.top='-20px';cont.appendChild(d);
-                let alt=-20;const bajar=setInterval(()=>{alt+=1.5;d.style.top=alt+'px';if(alt>window.innerHeight){clearInterval(bajar);cont.removeChild(d);}},50);
-            },400);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            if(esSinAnuncios) document.getElementById('btnPremium').textContent = "✅ SIN ANUNCIOS";
-            animarCodigosMini();
-            animarCodigosLuxtin();
-            cargarListaDispositivos('marcaMini', 'modeloMini');
-            cargarListaDispositivos('marcaLuxtin', 'modeloLuxtin');
-            iniciarCicloColores();
-        });
-        function cargarListaDispositivos(idMarca, idModelo) {
-            const selMarca = document.getElementById(idMarca);
-            if(!selMarca) return;
-            Object.keys(dispositivos).forEach(m => {
-                const opt = document.createElement('option'); opt.value=m; opt.textContent=m; selMarca.appendChild(opt);
-            });
-            const selMod = document.getElementById(idModelo);
-            selMarca.addEventListener('change', () => {
-                selMod.innerHTML = '<option value="">-- Primero elegí marca --</option>'; selMod.disabled=true;
-                if(selMarca.value) {
-                    dispositivos[selMarca.value].forEach(mod => {
-                        const opt = document.createElement('option'); opt.value=mod; opt.textContent=mod; selMod.appendChild(opt);
-                    }); selMod.disabled=false;
-                }
-                actualizarBotonLuxtin();
-            });
-            selMod.addEventListener('change', actualizarBotonLuxtin);
-        }
-        function actualizarBotonLuxtin() {
-            const marca = document.getElementById('marcaLuxtin')?.value;
-            const modelo = document.getElementById('modeloLuxtin')?.value;
-            const modo = document.querySelector('.boton-modo.luxtin.activo')?.dataset.modo;
-            document.getElementById('btnGenLuxtin').disabled = !(marca && modelo && modo);
-        }
-        function verificarIngresoMini() {
-            const c = document.getElementById('claveIngresoMini').value.trim().toUpperCase();
-            if(c === CLAVE_INGRESO_MINI) {
-                document.getElementById('pantallaInicio').classList.add('oculto');
-                document.getElementById('contenidoMini').classList.remove('oculto');
-                animarActualizadoMini();
-                if(!esSinAnuncios) iniciarAnuncios();
-            } else document.getElementById('msgClaveMini').textContent = "❌ CLAVE INCORRECTA: USÁ MINI TALENTO 777";
-        }
-        function verificarSeccionPremium() {
-            const correo = document.getElementById('correoSinAnuncios').value.trim().toLowerCase();
-            const claveAcceso = document.getElementById('claveAccesoPremium').value.trim();
-            let ok = false;
-            if(correo === CORREO_SIN_ANUNCIOS && claveAcceso === CLAVE_SIN_ANUNCIOS) {
-                esSinAnuncios = true; localStorage.setItem('esSinAnuncios', 'SI');
-                document.getElementById('btnPremium').textContent = "✅ SIN ANUNCIOS";
-                document.getElementById('msgPremium').textContent = "✅ ANUNCIOS DESACTIVADOS PARA SIEMPRE";
-                ok = true;
-            }
-            if(claveAcceso === CLAVE_ABRIR_LUXTIN) {
-                document.getElementById('pantallaPremium').classList.add('oculto');
-                document.getElementById('contenidoMini').classList.add('oculto');
-                document.getElementById('contenidoLuxtin').classList.remove('oculto');
-                document.getElementById('fondoLuxtin').classList.remove('oculto');
-                animarActualizadoLuxtin();
-                ok = true;
-            }
-            if(!ok) document.getElementById('msgPremium').textContent = "❌ CLAVE O CORREO INCORRECTO";
-        }
-        function volverAMini() {
-            document.getElementById('contenidoLuxtin').classList.add('oculto');
-            document.getElementById('fondoLuxtin').classList.add('oculto');
-            document.getElementById('pantallaPremium').classList.add('oculto');
-            document.getElementById('pantallaInicio').classList.add('oculto');
-            document.getElementById('contenidoMini').classList.remove('oculto');
-            animarActualizadoMini();
-        }
-
-        let modoMini = null;
-        window.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.boton-modo.mini').forEach(b => {
-                b.addEventListener('click', () => {
-                    document.querySelectorAll('.boton-modo.mini').forEach(x => x.classList.remove('activo'));
-                    b.classList.add('activo'); modoMini = b.dataset.modo;
-                    document.getElementById('btnGenMini').disabled = !(document.getElementById('marcaMini').value && document.getElementById('modeloMini').value && modoMini);
-                });
-            });
-            document.getElementById('modeloMini').addEventListener('change', () => {
-                document.getElementById('btnGenMini').disabled = !(document.getElementById('marcaMini').value && document.getElementById('modeloMini').value && modoMini);
-            });
-        });
-        function generarMini() {
-            document.getElementById('cargaMini').classList.remove('oculto');
-            document.getElementById('resMini').classList.add('oculto');
-            setTimeout(() => {
-                const s = calcularSensiMini(document.getElementById('marcaMini').value, document.getElementById('modeloMini').value, modoMini);
-                document.getElementById('tMini').textContent = s.nombre;
-                document.getElementById('dMini').textContent = s.descripcion;
-                document.getElementById('gMini').textContent = s.general;
-                document.getElementById('pMini').textContent = s.puntoRojo;
-                document.getElementById('m2Mini').textContent = s.mira2x;
-                document.getElementById('m4Mini').textContent = s.mira4x;
-                document.getElementById('fMini').textContent = s.francotirador;
-                document.getElementById('c360Mini').textContent = s.camara360;
-                document.getElementById('bMini').textContent = s.boton;
-                document.getElementById('cargaMini').classList.add('oculto');
-                document.getElementById('resMini').classList.remove('oculto');
-            },1500);
-        }
-
-        let modoLuxtin = null;
-        window.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.boton-modo.luxtin').forEach(b => {
-                b.addEventListener('click', () => {
-                    document.querySelectorAll('.boton-modo.luxtin').forEach(x => x.classList.remove('activo'));
-                    b.classList.add('activo'); modoLuxtin = b.dataset.modo;
-                    actualizarBotonLuxtin();
-                });
-            });
-        });
-        function generarLuxtin() {
-            datosTemporales.marca = document.getElementById('marcaLuxtin').value;
-            datosTemporales.modelo = document.getElementById('modeloLuxtin').value;
-            datosTemporales.modo = modoLuxtin;
-            document.getElementById('pantallaLuxtin').classList.add('oculto');
-            document.getElementById('preguntasLuxtin').classList.remove('oculto');
-        }
-        function seleccionarNivel(nivel) {
-            datosTemporales.nivel = nivel;
-            document.getElementById('preguntasLuxtin').classList.add('oculto');
-            document.getElementById('cargaLuxtin').classList.remove('oculto');
-            document.getElementById('resLuxtin').classList.add('oculto');
-
-            setTimeout(() => {
-                const s = calcularSensiLuxtinIA(datosTemporales.marca, datosTemporales.modelo, datosTemporales.modo, datosTemporales.nivel);
-                document.getElementById('tLuxtin').textContent = s.nombre;
-                document.getElementById('dLuxtin').textContent = s.descripcion;
-                document.getElementById('gLuxtin').textContent = s.general;
-                document.getElementById('pLuxtin').textContent = s.puntoRojo;
-                document.getElementById('m2Luxtin').textContent = s.mira2x;
-                document.getElementById('m4Luxtin').textContent = s.mira4x;
-                document.getElementById('fLuxtin').textContent = s.francotirador;
-                document.getElementById('c360Luxtin').textContent = s.camara360;
-                document.getElementById('bLuxtin').textContent = s.boton;
-                
-                document.getElementById('cargaLuxtin').classList.add('oculto');
-                document.getElementById('resLuxtin').classList.remove('oculto');
-                document.getElementById('pantallaLuxtin').classList.remove('oculto');
-            }, 1800);
-        }
-        function volverAPreguntas() {
-            document.getElementById('preguntasLuxtin').classList.add('oculto');
-            document.getElementById('pantallaLuxtin').classList.remove('oculto');
-        }
-    </script>
 </head>
 <body>
-    <canvas id="fondoMatrix"></canvas>
-    <script>
-        const canvas = document.getElementById('fondoMatrix');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        const tam = 16; const cols = canvas.width/tam; const lluvia = [];
-        for(let i=0; i<cols; i++) lluvia[i] = 1;
-        function dibujar(){
-            ctx.fillStyle='rgba(0,0,0,0.05)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle='#0f0'; ctx.font = tam+'px monospace';
-            for(let i=0; i<lluvia.length; i++){
-                const txt = letras[Math.floor(Math.random()*letras.length)];
-                ctx.fillText(txt, i*tam, lluvia[i]*tam);
-                if(lluvia[i]*tam>canvas.height && Math.random()>0.975) lluvia[i]=0;
-                lluvia[i]++;
+
+<div id="splash">
+    TUS MEJORES MODIFICACIONES PARA TU CELULAR
+</div>
+
+<div id="mainApp">
+    <div id="chat">
+        <div class="message bot">¡Hola! 🌟 Soy MOD1F LUXT1N. Escribe el modelo y la marca de tu celular para recibir tu modificación personalizada para Free Fire.</div>
+    </div>
+    <div id="inputArea">
+        <input type="text" id="deviceInput" placeholder="Ejemplo: Xiaomi Redmi Note 10" />
+        <button id="sendBtn">Enviar</button>
+    </div>
+</div>
+
+<script>
+    const splash = document.getElementById('splash');
+    const mainApp = document.getElementById('mainApp');
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('deviceInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    // Modificaciones predefinidas con instrucciones y sensibilidad para ejemplo
+    const modifications = {
+        'xiaomi redmi note 10': {
+            steps: [
+                "1. Abre la configuración del juego Free Fire.",
+                "2. Ve a la sección de Sensibilidad.",
+                "3. Ajusta la sensibilidad de la cámara a 85.",
+                "4. Ajusta la sensibilidad del general a 90.",
+                "5. Activa la opción 'Mejorar puntería' en las configuraciones avanzadas.",
+                "6. Instala el MOD1F LUXT1N en modo seguro (usa solo recursos mínimos).",
+                "7. Reinicia el juego para aplicar los cambios."
+            ],
+            sensitivity: {
+                general: 90,
+                red_dot: 85,
+                2x_scope: 80,
+                4x_scope: 75,
+                sniper: 70
+            }
+        },
+        'samsung galaxy s20': {
+            steps: [
+                "1. Abre Free Fire y entra a Configuración.",
+                "2. Selecciona Sensibilidad y coloca cámara en 88.",
+                "3. Ajusta sensibilidad general a 92 para mejor control.",
+                "4. Activa la opción 'Mejorar puntería automática'.",
+                "5. Aplica MOD1F LUXT1N siguiendo la guía interna.",
+                "6. Reinicia el dispositivo y el juego para asegurar la efectividad."
+            ],
+            sensitivity: {
+                general: 92,
+                red_dot: 87,
+                2x_scope: 82,
+                4x_scope: 78,
+                sniper: 72
             }
         }
-        setInterval(dibujar, 50);
-    </script>
+        // Puedes agregar más modelos aquí
+    };
 
-    <div id="fondoLuxtin" class="oculto"></div>
+    // Función para añadir mensajes al chat
+    function addMessage(text, sender = 'bot') {
+        const msgDiv = document.createElement('div');
+        msgDiv.classList.add('message', sender);
+        msgDiv.textContent = text;
+        chat.appendChild(msgDiv);
+        chat.scrollTop = chat.scrollHeight;
+    }
 
-    <div id="pantallaInicio">
-        <div class="titulo-ascii">MINI TALENTO 777</div>
-        <h2 style="text-align:center; color:#fff; margin:10px 0;">+ GENERADOR OPTIMIZADO</h2>
-        <div class="linea-roja"></div>
-        <h3 style="color:#ff0000; margin:10px 0;">INGRESÁ LA CLAVE DE ACCESO</h3>
-        <input type="text" id="claveIngresoMini" placeholder="Escribí: MINI TALENTO 777" style="text-align:center;">
-        <button onclick="verificarIngresoMini()">🔓 ENTRAR</button>
-        <div id="msgClaveMini" class="aviso"></div>
-    </div>
+    // Función para mostrar modificación paso a paso y sensibilidad
+    function showModification(device) {
+        const lowerDevice = device.toLowerCase();
+        if (modifications[lowerDevice]) {
+            const mod = modifications[lowerDevice];
+            addMessage(`Aquí está tu modificación personalizada MOD1F LUXT1N para tu ${device}:`, 'bot');
 
-    <div id="contenidoMini" class="oculto">
-        <button id="btnPremium" onclick="document.getElementById('pantallaPremium').classList.remove('oculto')">🔒 PREMIUM</button>
-        <div class="centrar">
-            <div id="textoActualizadoMini"></div>
-            <div id="codigosFlotantesMini"></div>
-            <div class="panel-terminal">
-                <div class="titulo-ascii">MINI TALENTO 777</div>
-                <div class="subtitulo">v2.2 | MODO HACKER - SUBIDA INSTANTÁNEA</div>
-                <div class="linea-roja"></div>
-                <div class="opcion"><span>1]</span> Seleccionar Marca</div>
-                <select id="marcaMini"><option value="">-- Elegí tu marca --</option></select>
-                <div class="opcion"><span>2]</span> Seleccionar Modelo</div>
-                <select id="modeloMini" disabled><option value="">-- Primero elegí marca --</option></select>
-                <div class="opcion"><span>3]</span> Elegí tu modo de juego</div>
-                <div class="contenedor-botones">
-                    <button class="boton-modo mini" data-modo="pvp">⚔️ PVP</button>
-                    <button class="boton-modo mini" data-modo="br">🗺️ BR</button>
-                    <button class="boton-modo mini" data-modo="de">🏙️ DE</button>
-                    <button class="boton-modo mini" data-modo="1vs6">🔥 1VS6 HACKER</button>
-                    <button class="boton-modo mini" data-modo="ump">💥 UMP/ESCOPETA</button>
-                </div>
-                <div class="linea-roja"></div>
-                <button id="btnGenMini" disabled onclick="generarMini()">⚡ GENERAR SENSI POTENTE</button>
-                <div id="cargaMini" class="carga-siri oculto"></div>
-                <div id="resMini" class="resultado oculto">
-                    <div class="linea-roja"></div>
-                    <div style="font-size:1.2rem; color:#ff0000; margin-bottom:5px;" id="tMini"></div>
-                    <div style="font-size:0.95rem; color:#aaa; margin-bottom:10px;" id="dMini"></div>
-                    <br>
-                    <div>General: <strong id="gMini"></strong></div>
-                    <div>Mira de punto rojo: <strong id="pMini"></strong></div>
-                    <div>Mira 2x: <strong id="m2Mini"></strong></div>
-                    <div>Mira 4x: <strong id="m4Mini"></strong></div>
-                    <div>Mira francotirador: <strong id="fMini"></strong></div>
-                    <div>Cámara 360: <strong id="c360Mini"></strong></div>
-                    <div style="color:#ff0000; margin-top:8px;">👉 Botón recomendado: <strong id="bMini"></strong></div>
-                    <div class="linea-roja"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+            // Mostrar pasos uno por uno con pausa
+            let stepIndex = 0;
+            function showNextStep() {
+                if(stepIndex < mod.steps.length) {
+                    addMessage(mod.steps[stepIndex], 'bot');
+                    stepIndex++;
+                    setTimeout(showNextStep, 3000);
+                } else {
+                    // Mostrar sensibilidad recomendada
+                    const s = mod.sensitivity;
+                    let sensText = "Sensibilidad recomendada para Free Fire:\n";
+                    sensText += `- General: ${s.general}\n`;
+                    sensText += `- Mira roja: ${s.red_dot}\n`;
+                    sensText += `- Mira 2x: ${s['2x_scope']}\n`;
+                    sensText += `- Mira 4x: ${s['4x_scope']}\n`;
+                    sensText += `- Mira francotirador: ${s.sniper}\n`;
+                    sensText += "\nCon esta configuración, tendrás mayor probabilidad de pegar más rojos y ser imparable.";
+                    addMessage(sensText, 'bot');
+                }
+            }
+            showNextStep();
+        } else {
+            addMessage("Lo siento, aún no tengo una modificación para ese modelo. Pero pronto la tendremos disponible. 😉", 'bot');
+        }
+    }
 
-    <div id="pantallaPremium" class="oculto">
-        <div class="panel-terminal">
-            <h2>🔒 SECCIÓN PREMIUM</h2>
-            <p style="color:#aaa; font-size:0.95rem; margin:10px 0;">Opción 1: Quitar anuncios → Correo: Luciano2024@gmail.com + Clave 50173533</p>
-            <p style="color:#aaa; font-size:0.95rem; margin:10px 0;">Opción 2: Abrir LUXTIN SENCI → Solo poné la clave: 50173533</p>
-            <input type="email" id="correoSinAnuncios" placeholder="Solo para quitar anuncios: tu correo autorizado">
-            <input type="password" id="claveAccesoPremium" placeholder="Clave de acceso">
-            <button onclick="verificarSeccionPremium()">✅ INGRESAR</button>
-            <button onclick="document.getElementById('pantallaPremium').classList.add('oculto')" style="background:#333;">❌ VOLVER</button>
-            <div id="msgPremium" class="aviso"></div>
-        </div>
-    </div>
+    // Evento para enviar el input
+    sendBtn.addEventListener('click', () => {
+        const device = input.value.trim();
+        if(device === '') return;
+        addMessage(device, 'user');
+        input.value = '';
+        showModification(device);
+    });
 
-    <!-- PANTALLA PREGUNTAS LUXTIN -->
-    <div id="preguntasLuxtin" class="oculto">
-        <div class="panel-terminal luxtin">
-            <div class="titulo-ascii luxtin">LUXTIN - IA INTELIGENTE</div>
-            <div class="linea-roja luxtin"></div>
-            <div class="contenedor-botones" style="margin-top: 15px;">
-                <button class="boton-modo luxtin" onclick="seleccionarNivel('bajo')">🐢 BAJA</button>
-                <button class="boton-modo luxtin" onclick="seleccionarNivel('medio')">⚡ MEDIA</button>
-                <button class="boton-modo luxtin" onclick="seleccionarNivel('alto')">🔥 ALTA / HACKER</button>
-            </div>
-            <button onclick="volverAPreguntas()" style="background:#333; margin-top:15px;">⬅️ VOLVER</button>
-        </div>
-    </div>
+    input.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') sendBtn.click();
+    });
 
-    <!-- PANTALLA PRINCIPAL LUXTIN -->
-    <div id="contenidoLuxtin" class="oculto">
-        <button id="btnVolverMini" onclick="volverAMini()">⬅️ VOLVER AL MENU</button>
-        <div class="centrar">
-            <div id="textoActualizadoLuxtin"></div>
-            <div id="codigosFlotantesLuxtin"></div>
-            <div class="panel-terminal luxtin" id="pantallaLuxtin">
-                <div class="titulo-ascii luxtin">LUXTIN SENCI</div>
-                <div class="subtitulo luxtin">IA INTELIGENTE - SENSI ÚNICA Y SIN FALLOS</div>
-                <div class="linea-roja luxtin"></div>
-                <div class="opcion luxtin"><span>1]</span> Seleccionar Marca</div>
-                <select id="marcaLuxtin" class="luxtin"><option value="">-- Elegí tu marca --</option></select>
-                <div class="opcion luxtin"><span>2]</span> Seleccionar Modelo</div>
-                <select id="modeloLuxtin" class="luxtin" disabled><option value="">-- Primero elegí marca --</option></select>
-                <div class="opcion luxtin"><span>3]</span> Elegí tu modo de juego</div>
-                <div class="contenedor-botones">
-                    <button class="boton-modo luxtin" data-modo="pvp">⚔️ PVP</button>
-                    <button class="boton-modo luxtin" data-modo="br">🗺️ BR</button>
-                    <button class="boton-modo luxtin" data-modo="de">🏙️ DE</button>
-                    <button class="boton-modo luxtin" data-modo="1vs6">🔥 1VS6</button>
-                    <button class="boton-modo luxtin" data-modo="ump">💥 UMP/ESCOPETA</button>
-                </div>
-                <div class="linea-roja luxtin"></div>
-                <button id="btnGenLuxtin" class="luxtin" disabled onclick="generarLuxtin()">🧠 GENERAR CON IA</button>
-                <div id="cargaLuxtin" class="carga-siri luxtin oculto"></div>
-                <div id="resLuxtin" class="resultado luxtin oculto">
-                    <div class="linea-roja luxtin"></div>
-                    <div style="font-size:1.2rem; color:var(--color-luxtin); margin-bottom:5px;" id="tLuxtin"></div>
-                    <div style="font-size:0.95rem; color:#aaa; margin-bottom:10px;" id="dLuxtin"></div>
-                    <br>
-                    <div>General: <strong id="gLuxtin"></strong></div>
-                    <div>Mira de punto rojo: <strong id="pLuxtin"></strong></div>
-                    <div>Mira 2x: <strong id="m2Luxtin"></strong></div>
-                    <div>Mira 4x: <strong id="m4Luxtin"></strong></div>
-                    <div>Mira francotirador: <strong id="fLuxtin"></strong></div>
-                    <div>Cámara 360: <strong id="c360Luxtin"></strong></div>
-                    <div style="color:var(--color-luxtin); margin-top:8px;">👉 Botón recomendado: <strong id="bLuxtin"></strong></div>
-                    <div class="linea-roja luxtin"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    // Mostrar la app principal tras 5 segundos y ocultar splash
+    setTimeout(() => {
+        splash.style.display = 'none';
+        mainApp.style.display = 'flex';
+        input.focus();
+    }, 5000);
+</script>
 
-    <!-- ANUNCIO PERIÓDICO -->
-    <div id="anuncioPeriodico" class="oculto">
-        <div class="panel-terminal">
-            <h2 style="color:#ff0000; text-align:center;">⚠️ ANUNCIO IMPORTANTE</h2>
-            <p style="text-align:center; color:#fff; margin:15px 0;">No compartas este generador con nadie, es exclusivo para vos.<br>Actualizamos la base de datos cada semana para adaptarnos a los cambios de Free Fire.</p>
-            <div class="linea-roja"></div>
-            <p style="text-align:center; color:#aaa;">Cerrando automáticamente en 3 segundos...</p>
-        </div>
-    </div>
 </body>
 </html>
